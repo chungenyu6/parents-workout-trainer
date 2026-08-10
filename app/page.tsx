@@ -229,7 +229,7 @@ export default function Home() {
   const dailyIndex = useMemo(() => new Date().getDate() % conceptCards.length, []);
 
   const copyReport = async () => {
-    const template = `日期：\n今天：□ 完成  □ 做一點  □ 休息\n大約：___ 分鐘\n身體：□ 舒服  □ 有點累  □ 不舒服（哪裡：___）\n下次：□ 願意再做  □ 看狀況  □ 想先調整`;
+    const template = `日期：\n今天：□ 完成  □ 做一點  □ 休息\n椅子坐站：___ 下 × ___ 組\n扶牆踮腳：___ 下 × ___ 組\n划船：___ 下 × ___ 組（□ 空手  □ 彈力帶：___）\n扶桌髖鉸鏈：___ 下 × ___ 組（□ 空手  □ 負重：___ kg）\n大約：___ 分鐘\n協助：□ 自己完成  □ 有扶持  □ 有人協助\n身體：□ 舒服  □ 有點累  □ 不舒服（哪裡：___）\n下次：□ 願意再做  □ 看狀況  □ 想先調整`;
     try {
       await navigator.clipboard.writeText(template);
       setCopied(true);
@@ -398,6 +398,18 @@ export default function Home() {
             <section className="empty-guidance">
               <AppIcon name="calendar" />
               <div><h2>下一筆不用更厲害</h2><p>只要再安全完成一次，就是正在建立規律。</p></div>
+            </section>
+            <section className="trend-preview" aria-labelledby="trend-preview-title">
+              <div>
+                <span className="section-kicker">累積 3 次後</span>
+                <h2 id="trend-preview-title">每個動作會有自己的趨勢</h2>
+                <p>分開查看下數、組數與阻力變化，不把四個不同動作混成一個分數。</p>
+              </div>
+              <div className="mini-trends" aria-label="未來趨勢圖示意，尚無足夠資料">
+                <span><i style={{ height: "30%" }} /><i style={{ height: "48%" }} /><i style={{ height: "64%" }} /></span>
+                <span><i style={{ height: "42%" }} /><i style={{ height: "42%" }} /><i style={{ height: "58%" }} /></span>
+                <span><i style={{ height: "24%" }} /><i style={{ height: "38%" }} /><i style={{ height: "38%" }} /></span>
+              </div>
             </section>
           </div>
         )}

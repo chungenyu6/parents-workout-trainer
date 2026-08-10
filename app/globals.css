@@ -119,6 +119,12 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .record-moves span { padding: 6px 9px; border-radius: 999px; color: var(--green-dark); background: var(--green-soft); font-size: .72rem; font-weight: 700; }
 .empty-guidance { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; padding: 20px; border-radius: 22px; background: rgba(255,255,255,.55); }
 .empty-guidance p { margin: 6px 0 0; color: var(--muted); }
+.trend-preview { display: grid; gap: 18px; padding: 22px; border: 1px dashed #bdc8bd; border-radius: 22px; background: rgba(255,255,255,.36); }
+.trend-preview h2 { margin: 5px 0 7px; font-size: 1.2rem; }
+.trend-preview p { margin: 0; color: var(--muted); line-height: 1.6; }
+.mini-trends { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; height: 78px; }
+.mini-trends > span { display: flex; align-items: end; justify-content: center; gap: 5px; padding: 8px; border-bottom: 1px solid #9eab9f; }
+.mini-trends i { width: 8px; border-radius: 5px 5px 0 0; background: var(--green-soft); }
 .progress-card { display: grid; gap: 24px; align-items: center; padding: 26px; border-radius: 28px; background: linear-gradient(135deg, #dfeada, #f6e8bb); }
 .progress-orbit { position: relative; width: 180px; aspect-ratio: 1; margin: 0 auto; border: 1px dashed #8ca080; border-radius: 50%; }
 .orbit-center { position: absolute; inset: 25px; display: grid; place-content: center; border-radius: 50%; text-align: center; background: rgba(255,255,255,.72); }
@@ -157,6 +163,7 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
   .report-card { grid-template-columns: 1fr auto; align-items: center; }
   .primary-action { min-width: 210px; padding: 0 22px; }
   .progress-card { grid-template-columns: 220px 1fr; }
+  .trend-preview { grid-template-columns: 1fr 220px; align-items: center; }
   .three-principles { grid-template-columns: repeat(3, 1fr); }
   .three-principles article { display: block; }
   .three-principles article > span { margin-bottom: 14px; }
