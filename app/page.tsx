@@ -13,6 +13,18 @@ type ConceptCard = {
   tag: string;
 };
 
+type WorkoutRecord = {
+  date: string;
+  day: string;
+  label: string;
+  minutes: number;
+  chairStandReps?: number;
+  calfRaiseReps?: number;
+  rowReps?: number;
+  hipHingeReps: number;
+  sets: number;
+};
+
 const people: Record<PersonId, { label: string; greeting: string; framing: string }> = {
   dad: {
     label: "爸爸",
@@ -206,13 +218,24 @@ const conceptCards: ConceptCard[] = [
 
 const week = [
   { weekday: "一", date: "10", status: "done" },
-  { weekday: "二", date: "11", status: "empty" },
+  { weekday: "二", date: "11", status: "done" },
   { weekday: "三", date: "12", status: "empty" },
   { weekday: "四", date: "13", status: "empty" },
   { weekday: "五", date: "14", status: "empty" },
   { weekday: "六", date: "15", status: "empty" },
   { weekday: "日", date: "16", status: "empty" },
 ];
+
+const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
+  dad: [
+    { date: "11", day: "週二", label: "Day 2", minutes: 20, hipHingeReps: 10, sets: 1 },
+    { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1 },
+  ],
+  mom: [
+    { date: "11", day: "週二", label: "Day 2", minutes: 20, hipHingeReps: 10, sets: 1 },
+    { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1 },
+  ],
+};
 
 function AppIcon({ name }: { name: "sun" | "book" | "leaf" | "calendar" }) {
   const icons = { sun: "☀", book: "知", leaf: "葉", calendar: "週" };
@@ -225,6 +248,7 @@ export default function Home() {
   const [conceptIndex, setConceptIndex] = useState(0);
   const [copied, setCopied] = useState(false);
   const person = people[personId];
+  const personRecords = workoutRecords[personId];
   const concept = conceptCards[conceptIndex];
   const dailyIndex = useMemo(() => new Date().getDate() % conceptCards.length, []);
 
@@ -286,7 +310,7 @@ export default function Home() {
                 </div>
                 <div>
                   <span>本週</span>
-                  <strong>1／3 次</strong>
+                  <strong>2／3 次</strong>
                 </div>
               </div>
             </section>
@@ -377,23 +401,25 @@ export default function Home() {
             </section>
             <section className="record-month" aria-labelledby="record-title">
               <div className="section-heading">
-                <div><div className="section-kicker">2026 年 8 月</div><h2 id="record-title">本月 1 次</h2></div>
-                <span className="positive-badge">第一天完成</span>
+                <div><div className="section-kicker">2026 年 8 月</div><h2 id="record-title">本月 {personRecords.length} 次</h2></div>
+                <span className="positive-badge">連續完成 2 次</span>
               </div>
-              <div className="record-entry">
-                <div className="record-date"><strong>10</strong><span>週一</span></div>
-                <div className="record-content">
-                  <strong>Day 1・四個動作全部完成</strong>
-                  <p>看起來身體舒服，沒有觀察到明顯不適；總分鐘數與次數尚未回報。</p>
-                  <div className="record-moves" aria-label="今天完成的四個動作">
-                    <span>椅子坐站</span>
-                    <span>扶牆踮腳</span>
-                    <span>空手划船</span>
-                    <span>扶桌髖鉸鏈</span>
+              {personRecords.map((record) => (
+                <div className="record-entry" key={record.date}>
+                  <div className="record-date"><strong>{record.date}</strong><span>{record.day}</span></div>
+                  <div className="record-content">
+                    <strong>{record.label}・四個動作全部完成</strong>
+                    <p>約 {record.minutes} 分鐘，自己完成；身體感覺舒服，並願意下次再做。</p>
+                    <div className="record-moves" aria-label={`${record.label} 完成的四個動作`}>
+                      <span>椅子坐站：未記錄下數 × {record.sets} 組</span>
+                      <span>扶牆踮腳：未記錄下數 × {record.sets} 組</span>
+                      <span>空手划船：未記錄下數 × {record.sets} 組</span>
+                      <span>扶桌髖鉸鏈：{record.hipHingeReps} 下 × {record.sets} 組</span>
+                    </div>
+                    <small>四個動作皆未使用彈力帶或額外負重。</small>
                   </div>
-                  <small>今天先以空手動作為主，沒有使用彈力帶。</small>
                 </div>
-              </div>
+              ))}
             </section>
             <section className="empty-guidance">
               <AppIcon name="calendar" />
@@ -422,14 +448,14 @@ export default function Home() {
               <p>第一階段不比較重量、流汗或運動量，只看安全、完成與願意再做。</p>
             </section>
             <section className="progress-card">
-              <div className="progress-orbit" aria-label="六次目標，目前完成一次">
-                <div className="orbit-center"><strong>1</strong><span>／6 次</span></div>
-                {[0, 1, 2, 3, 4, 5].map((item) => <i key={item} className={item === 0 ? "earned" : ""} />)}
+              <div className="progress-orbit" aria-label="六次目標，目前完成兩次">
+                <div className="orbit-center"><strong>2</strong><span>／6 次</span></div>
+                {[0, 1, 2, 3, 4, 5].map((item) => <i key={item} className={item < 2 ? "earned" : ""} />)}
               </div>
               <div className="progress-copy">
-                <span className="positive-badge">第一片葉子</span>
-                <h2>願意開始，就是第一個里程碑</h2>
-                <p>接下來只需要再累積一次安全、做得到的經驗。</p>
+                <span className="positive-badge">兩次溫和累積</span>
+                <h2>第二次出現，規律正在發芽</h2>
+                <p>兩次都舒服完成，也都願意再做；接下來繼續維持做得到的節奏。</p>
               </div>
             </section>
             <section className="three-principles">
