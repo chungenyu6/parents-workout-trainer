@@ -219,7 +219,7 @@ const conceptCards: ConceptCard[] = [
 const week = [
   { weekday: "一", date: "10", status: "done" },
   { weekday: "二", date: "11", status: "done" },
-  { weekday: "三", date: "12", status: "empty" },
+  { weekday: "三", date: "12", status: "walk" },
   { weekday: "四", date: "13", status: "empty" },
   { weekday: "五", date: "14", status: "empty" },
   { weekday: "六", date: "15", status: "empty" },
@@ -296,20 +296,20 @@ export default function Home() {
         {view === "today" && (
           <div className="view-stack">
             <section className="hero-card">
-              <div className="hero-kicker">今天的溫和肌力</div>
-              <h1>{person.greeting}</h1>
-              <p>{person.framing}</p>
+              <div className="hero-kicker">今天的活動</div>
+              <h1>散步一小時，也是一筆值得留下的軌跡</h1>
+              <p>{person.label}今天完成散步；肌力與散步分開累積，不互相取代。</p>
               <div className="hero-summary">
                 <div>
                   <span>今天</span>
-                  <strong>4 個動作</strong>
+                  <strong>散步 60 分</strong>
                 </div>
                 <div>
-                  <span>大約</span>
-                  <strong>5–8 分鐘</strong>
+                  <span>其他活動</span>
+                  <strong>1 次</strong>
                 </div>
                 <div>
-                  <span>本週</span>
+                  <span>本週肌力</span>
                   <strong>2／3 次</strong>
                 </div>
               </div>
@@ -321,14 +321,17 @@ export default function Home() {
                   <div className="section-kicker">這一週</div>
                   <h2 id="week-title">累積出現，不必連續</h2>
                 </div>
-                <span className="status-key"><i /> 已完成</span>
+                <div className="status-keys" aria-label="週曆圖例">
+                  <span className="status-key"><i /> 肌力</span>
+                  <span className="status-key walk-key"><i /> 散步</span>
+                </div>
               </div>
               <div className="week-grid">
                 {week.map((day) => (
                   <div key={day.date} className={`day-cell ${day.status}`}>
                     <span>{day.weekday}</span>
                     <strong>{day.date}</strong>
-                    <small>{day.status === "done" ? "完成" : "—"}</small>
+                    <small>{day.status === "done" ? "肌力" : day.status === "walk" ? "散步" : "—"}</small>
                   </div>
                 ))}
               </div>
@@ -350,7 +353,7 @@ export default function Home() {
               <div className="section-heading">
                 <div>
                   <div className="section-kicker">共同起點</div>
-                  <h2 id="exercise-title">今天的四個動作</h2>
+                  <h2 id="exercise-title">下一次的四個動作</h2>
                 </div>
                 <span className="section-aside">各 1 組即可</span>
               </div>
@@ -401,8 +404,19 @@ export default function Home() {
             </section>
             <section className="record-month" aria-labelledby="record-title">
               <div className="section-heading">
-                <div><div className="section-kicker">2026 年 8 月</div><h2 id="record-title">本月 {personRecords.length} 次</h2></div>
-                <span className="positive-badge">連續完成 2 次</span>
+                <div><div className="section-kicker">2026 年 8 月</div><h2 id="record-title">2 次肌力・1 次散步</h2></div>
+                <span className="positive-badge">三天都有活動</span>
+              </div>
+              <div className="record-entry walk-entry">
+                <div className="record-date"><strong>12</strong><span>週三</span></div>
+                <div className="record-content">
+                  <strong>散步・60 分鐘</strong>
+                  <p>今天以散步作為活動，沒有進行四個肌力動作。</p>
+                  <div className="record-moves" aria-label="今天完成的其他活動">
+                    <span>散步：60 分鐘</span>
+                  </div>
+                  <small>速度、距離與身體感受尚未回報；不列入肌力訓練次數。</small>
+                </div>
               </div>
               {personRecords.map((record) => (
                 <div className="record-entry" key={record.date}>
