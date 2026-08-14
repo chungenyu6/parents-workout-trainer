@@ -17,12 +17,20 @@ type WorkoutRecord = {
   date: string;
   day: string;
   label: string;
-  minutes: number;
+  minutes?: number;
   chairStandReps?: number;
   calfRaiseReps?: number;
   rowReps?: number;
-  hipHingeReps: number;
+  hipHingeReps?: number;
   sets: number;
+  summary: string;
+};
+
+type ActivityRecord = {
+  date: string;
+  day: string;
+  activity: "散步";
+  minutes?: number;
 };
 
 const people: Record<PersonId, { label: string; greeting: string; framing: string }> = {
@@ -217,23 +225,36 @@ const conceptCards: ConceptCard[] = [
 ];
 
 const week = [
-  { weekday: "一", date: "10", status: "done" },
-  { weekday: "二", date: "11", status: "done" },
-  { weekday: "三", date: "12", status: "walk" },
-  { weekday: "四", date: "13", status: "empty" },
-  { weekday: "五", date: "14", status: "empty" },
-  { weekday: "六", date: "15", status: "empty" },
-  { weekday: "日", date: "16", status: "empty" },
+  { weekday: "一", date: "10" },
+  { weekday: "二", date: "11" },
+  { weekday: "三", date: "12" },
+  { weekday: "四", date: "13" },
+  { weekday: "五", date: "14" },
+  { weekday: "六", date: "15" },
+  { weekday: "日", date: "16" },
 ];
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
-    { date: "11", day: "週二", label: "Day 2", minutes: 20, hipHingeReps: 10, sets: 1 },
-    { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1 },
+    { date: "14", day: "週五", label: "Day 3", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 1, summary: "總分鐘數、協助程度與身體感受未回報。" },
+    { date: "11", day: "週二", label: "Day 2", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
+    { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
-    { date: "11", day: "週二", label: "Day 2", minutes: 20, hipHingeReps: 10, sets: 1 },
-    { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1 },
+    { date: "14", day: "週五", label: "Day 4", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 1, summary: "總分鐘數、協助程度與身體感受未回報。" },
+    { date: "13", day: "週四", label: "Day 3", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 1, summary: "總分鐘數、協助程度與身體感受未回報。" },
+    { date: "11", day: "週二", label: "Day 2", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
+    { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
+  ],
+};
+
+const activityRecords: Record<PersonId, ActivityRecord[]> = {
+  dad: [
+    { date: "13", day: "週四", activity: "散步" },
+    { date: "12", day: "週三", activity: "散步", minutes: 60 },
+  ],
+  mom: [
+    { date: "12", day: "週三", activity: "散步", minutes: 60 },
   ],
 };
 
@@ -249,6 +270,13 @@ export default function Home() {
   const [copied, setCopied] = useState(false);
   const person = people[personId];
   const personRecords = workoutRecords[personId];
+  const personActivities = activityRecords[personId];
+  const timelineRecords = [
+    ...personRecords.map((record) => ({ ...record, kind: "strength" as const })),
+    ...personActivities.map((record) => ({ ...record, kind: "walk" as const })),
+  ].sort((a, b) => Number(b.date) - Number(a.date));
+  const strengthCount = personRecords.length;
+  const activityCount = personActivities.length;
   const concept = conceptCards[conceptIndex];
   const dailyIndex = useMemo(() => new Date().getDate() % conceptCards.length, []);
 
@@ -296,21 +324,21 @@ export default function Home() {
         {view === "today" && (
           <div className="view-stack">
             <section className="hero-card">
-              <div className="hero-kicker">今天的活動</div>
-              <h1>散步一小時，也是一筆值得留下的軌跡</h1>
-              <p>{person.label}今天完成散步；肌力與散步分開累積，不互相取代。</p>
+              <div className="hero-kicker">今天的溫和肌力</div>
+              <h1>一組十下，穩穩完成就很好</h1>
+              <p>{person.label}今天四個動作都以空手完成；總分鐘數與身體感受尚未回報。</p>
               <div className="hero-summary">
                 <div>
                   <span>今天</span>
-                  <strong>散步 60 分</strong>
+                  <strong>10 下 × 1 組</strong>
                 </div>
                 <div>
                   <span>其他活動</span>
-                  <strong>1 次</strong>
+                  <strong>{activityCount} 次</strong>
                 </div>
                 <div>
-                  <span>本週肌力</span>
-                  <strong>2／3 次</strong>
+                  <span>本週肌力・目標 3</span>
+                  <strong>{strengthCount} 次</strong>
                 </div>
               </div>
             </section>
@@ -328,11 +356,18 @@ export default function Home() {
               </div>
               <div className="week-grid">
                 {week.map((day) => (
-                  <div key={day.date} className={`day-cell ${day.status}`}>
+                  (() => {
+                    const status = personRecords.some((record) => record.date === day.date)
+                      ? "done"
+                      : personActivities.some((record) => record.date === day.date)
+                        ? "walk"
+                        : "empty";
+                    return <div key={day.date} className={`day-cell ${status}`}>
                     <span>{day.weekday}</span>
                     <strong>{day.date}</strong>
-                    <small>{day.status === "done" ? "肌力" : day.status === "walk" ? "散步" : "—"}</small>
-                  </div>
+                    <small>{status === "done" ? "肌力" : status === "walk" ? "散步" : "—"}</small>
+                    </div>;
+                  })()
                 ))}
               </div>
             </section>
@@ -353,7 +388,7 @@ export default function Home() {
               <div className="section-heading">
                 <div>
                   <div className="section-kicker">共同起點</div>
-                  <h2 id="exercise-title">下一次的四個動作</h2>
+                  <h2 id="exercise-title">今天完成的四個動作</h2>
                 </div>
                 <span className="section-aside">各 1 組即可</span>
               </div>
@@ -404,33 +439,34 @@ export default function Home() {
             </section>
             <section className="record-month" aria-labelledby="record-title">
               <div className="section-heading">
-                <div><div className="section-kicker">2026 年 8 月</div><h2 id="record-title">2 次肌力・1 次散步</h2></div>
-                <span className="positive-badge">三天都有活動</span>
+                <div><div className="section-kicker">2026 年 8 月</div><h2 id="record-title">{strengthCount} 次肌力・{activityCount} 次散步</h2></div>
+                <span className="positive-badge">本週肌力目標已達成</span>
               </div>
-              <div className="record-entry walk-entry">
-                <div className="record-date"><strong>12</strong><span>週三</span></div>
-                <div className="record-content">
-                  <strong>散步・60 分鐘</strong>
-                  <p>今天以散步作為活動，沒有進行四個肌力動作。</p>
-                  <div className="record-moves" aria-label="今天完成的其他活動">
-                    <span>散步：60 分鐘</span>
+              {timelineRecords.map((record) => record.kind === "walk" ? (
+                <div className="record-entry walk-entry" key={`walk-${record.date}`}>
+                  <div className="record-date"><strong>{record.date}</strong><span>{record.day}</span></div>
+                  <div className="record-content">
+                    <strong>散步・{record.minutes ? `${record.minutes} 分鐘` : "時間未回報"}</strong>
+                    <p>這天以散步作為其他活動，沒有肌力訓練紀錄。</p>
+                    <div className="record-moves" aria-label={`${record.day}完成的其他活動`}>
+                      <span>散步：{record.minutes ? `${record.minutes} 分鐘` : "時間未記錄"}</span>
+                    </div>
+                    <small>速度、距離與身體感受尚未回報；不列入肌力訓練次數。</small>
                   </div>
-                  <small>速度、距離與身體感受尚未回報；不列入肌力訓練次數。</small>
                 </div>
-              </div>
-              {personRecords.map((record) => (
-                <div className="record-entry" key={record.date}>
+              ) : (
+                <div className="record-entry" key={`strength-${record.date}`}>
                   <div className="record-date"><strong>{record.date}</strong><span>{record.day}</span></div>
                   <div className="record-content">
                     <strong>{record.label}・四個動作全部完成</strong>
-                    <p>約 {record.minutes} 分鐘，自己完成；身體感覺舒服，並願意下次再做。</p>
+                    <p>{record.summary}</p>
                     <div className="record-moves" aria-label={`${record.label} 完成的四個動作`}>
-                      <span>椅子坐站：未記錄下數 × {record.sets} 組</span>
-                      <span>扶牆踮腳：未記錄下數 × {record.sets} 組</span>
-                      <span>空手划船：未記錄下數 × {record.sets} 組</span>
-                      <span>扶桌髖鉸鏈：{record.hipHingeReps} 下 × {record.sets} 組</span>
+                      <span>椅子坐站：{record.chairStandReps ? `${record.chairStandReps} 下` : "未記錄下數"} × {record.sets} 組</span>
+                      <span>扶牆踮腳：{record.calfRaiseReps ? `${record.calfRaiseReps} 下` : "未記錄下數"} × {record.sets} 組</span>
+                      <span>空手划船：{record.rowReps ? `${record.rowReps} 下` : "未記錄下數"} × {record.sets} 組</span>
+                      <span>扶桌髖鉸鏈：{record.hipHingeReps ? `${record.hipHingeReps} 下` : "未記錄下數"} × {record.sets} 組</span>
                     </div>
-                    <small>四個動作皆未使用彈力帶或額外負重。</small>
+                    <small>四個動作皆為空手，未使用彈力帶或額外負重。</small>
                   </div>
                 </div>
               ))}
@@ -441,7 +477,7 @@ export default function Home() {
             </section>
             <section className="trend-preview" aria-labelledby="trend-preview-title">
               <div>
-                <span className="section-kicker">累積 3 次後</span>
+                <span className="section-kicker">同一動作累積 3 次數字後</span>
                 <h2 id="trend-preview-title">每個動作會有自己的趨勢</h2>
                 <p>分開查看下數、組數與阻力變化，不把四個不同動作混成一個分數。</p>
               </div>
@@ -462,14 +498,14 @@ export default function Home() {
               <p>第一階段不比較重量、流汗或運動量，只看安全、完成與願意再做。</p>
             </section>
             <section className="progress-card">
-              <div className="progress-orbit" aria-label="六次目標，目前完成兩次">
-                <div className="orbit-center"><strong>2</strong><span>／6 次</span></div>
-                {[0, 1, 2, 3, 4, 5].map((item) => <i key={item} className={item < 2 ? "earned" : ""} />)}
+              <div className="progress-orbit" aria-label={`六次目標，目前完成${strengthCount}次`}>
+                <div className="orbit-center"><strong>{strengthCount}</strong><span>／6 次</span></div>
+                {[0, 1, 2, 3, 4, 5].map((item) => <i key={item} className={item < strengthCount ? "earned" : ""} />)}
               </div>
               <div className="progress-copy">
-                <span className="positive-badge">兩次溫和累積</span>
-                <h2>第二次出現，規律正在發芽</h2>
-                <p>兩次都舒服完成，也都願意再做；接下來繼續維持做得到的節奏。</p>
+                <span className="positive-badge">{strengthCount} 次肌力累積</span>
+                <h2>本週目標已達成，恢復也是計畫的一部分</h2>
+                <p>接下來不必為了連續紀錄而硬做；留意身體反應，再安排下一次舒服、做得到的訓練。</p>
               </div>
             </section>
             <section className="three-principles">
