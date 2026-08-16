@@ -236,11 +236,13 @@ const week = [
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
+    { date: "15", day: "週六", label: "Day 4", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 1, summary: "總分鐘數、協助程度與身體感受未回報。" },
     { date: "14", day: "週五", label: "Day 3", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 1, summary: "總分鐘數、協助程度與身體感受未回報。" },
     { date: "11", day: "週二", label: "Day 2", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
     { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
+    { date: "15", day: "週六", label: "Day 5", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 1, summary: "總分鐘數、協助程度與身體感受未回報。" },
     { date: "14", day: "週五", label: "Day 4", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 1, summary: "總分鐘數、協助程度與身體感受未回報。" },
     { date: "13", day: "週四", label: "Day 3", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 1, summary: "總分鐘數、協助程度與身體感受未回報。" },
     { date: "11", day: "週二", label: "Day 2", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
@@ -505,7 +507,7 @@ export default function Home() {
               <div className="progress-copy">
                 <span className="positive-badge">{strengthCount} 次肌力累積</span>
                 <h2>本週目標已達成，恢復也是計畫的一部分</h2>
-                <p>接下來不必為了連續紀錄而硬做；留意身體反應，再安排下一次舒服、做得到的訓練。</p>
+                <p>本週整體回報是舒服、輕鬆。接下來不必為了連續紀錄而硬做；留意身體反應，再安排下一次做得到的訓練。</p>
               </div>
             </section>
             <section className="three-principles">
