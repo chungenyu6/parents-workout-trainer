@@ -72,6 +72,7 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .status-key { display: inline-flex; align-items: center; gap: 6px; }
 .status-key i { width: 9px; height: 9px; border-radius: 50%; background: var(--green); }
 .status-key.walk-key i { background: #c48a31; }
+.status-key.no-strength-key i { background: #a1aaa4; }
 .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
 .day-cell { min-width: 0; padding: 11px 2px 9px; border: 1px solid var(--line); border-radius: 15px; text-align: center; background: rgba(255,255,255,.42); }
 .day-cell span, .day-cell strong, .day-cell small { display: block; }
@@ -82,6 +83,8 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .day-cell.done span, .day-cell.done small { color: #e4efe6; }
 .day-cell.walk { border-color: #d2a45c; color: #5f461d; background: #f4dca9; }
 .day-cell.walk span, .day-cell.walk small { color: #725727; }
+.day-cell.no-strength { border-color: #bac3bd; color: #526059; background: #e9ece9; }
+.day-cell.no-strength span, .day-cell.no-strength small { color: #657169; }
 .daily-concept { padding: 22px; border: 1px solid #e5d5a8; border-radius: 24px; background: var(--sun-soft); }
 .concept-topline { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .concept-topline > span { display: inline-flex; align-items: center; gap: 8px; color: #785d20; font-size: .78rem; font-weight: 800; letter-spacing: .08em; }
@@ -116,6 +119,7 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .record-date { display: grid; place-items: center; width: 58px; height: 62px; border-radius: 16px; color: #fff; background: var(--green); }
 .walk-entry .record-date { color: #5f461d; background: #f0c96a; }
 .walk-entry .record-moves span { color: #684d1e; background: #fbf1cf; }
+.no-strength-entry .record-date { color: #526059; background: #dfe5e0; }
 .record-date strong, .record-date span { display: block; }
 .record-date strong { font-size: 1.25rem; }
 .record-date span { font-size: .7rem; }

@@ -24,6 +24,7 @@ type WorkoutRecord = {
   hipHingeReps?: number;
   sets: number;
   summary: string;
+  completedMoves?: 3 | 4;
 };
 
 type ActivityRecord = {
@@ -31,6 +32,12 @@ type ActivityRecord = {
   day: string;
   activity: "散步";
   minutes?: number;
+};
+
+type NoStrengthRecord = {
+  date: string;
+  day: string;
+  summary: string;
 };
 
 const people: Record<PersonId, { label: string; greeting: string; framing: string }> = {
@@ -225,23 +232,27 @@ const conceptCards: ConceptCard[] = [
 ];
 
 const week = [
-  { weekday: "一", date: "10" },
-  { weekday: "二", date: "11" },
-  { weekday: "三", date: "12" },
-  { weekday: "四", date: "13" },
-  { weekday: "五", date: "14" },
-  { weekday: "六", date: "15" },
-  { weekday: "日", date: "16" },
+  { weekday: "一", date: "17" },
+  { weekday: "二", date: "18" },
+  { weekday: "三", date: "19" },
+  { weekday: "四", date: "20" },
+  { weekday: "五", date: "21" },
+  { weekday: "六", date: "22" },
+  { weekday: "日", date: "23" },
 ];
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
+    { date: "18", day: "週二", label: "Day 6", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
+    { date: "17", day: "週一", label: "Day 5", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, sets: 2, completedMoves: 3, summary: "前三個動作各完成 10 下 × 2 組；扶桌髖鉸鏈未進行。其他細節與身體感受未回報。" },
     { date: "15", day: "週六", label: "Day 4", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 1, summary: "總分鐘數、協助程度與身體感受未回報。" },
     { date: "14", day: "週五", label: "Day 3", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 1, summary: "總分鐘數、協助程度與身體感受未回報。" },
     { date: "11", day: "週二", label: "Day 2", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
     { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
+    { date: "18", day: "週二", label: "Day 7", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
+    { date: "17", day: "週一", label: "Day 6", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
     { date: "15", day: "週六", label: "Day 5", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 1, summary: "總分鐘數、協助程度與身體感受未回報。" },
     { date: "14", day: "週五", label: "Day 4", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 1, summary: "總分鐘數、協助程度與身體感受未回報。" },
     { date: "13", day: "週四", label: "Day 3", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 1, summary: "總分鐘數、協助程度與身體感受未回報。" },
@@ -260,6 +271,15 @@ const activityRecords: Record<PersonId, ActivityRecord[]> = {
   ],
 };
 
+const noStrengthRecords: Record<PersonId, NoStrengthRecord[]> = {
+  dad: [
+    { date: "16", day: "週日", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
+  ],
+  mom: [
+    { date: "16", day: "週日", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
+  ],
+};
+
 function AppIcon({ name }: { name: "sun" | "book" | "leaf" | "calendar" }) {
   const icons = { sun: "☀", book: "知", leaf: "葉", calendar: "週" };
   return <span className="app-icon" aria-hidden="true">{icons[name]}</span>;
@@ -273,9 +293,11 @@ export default function Home() {
   const person = people[personId];
   const personRecords = workoutRecords[personId];
   const personActivities = activityRecords[personId];
+  const personNoStrengthRecords = noStrengthRecords[personId];
   const timelineRecords = [
     ...personRecords.map((record) => ({ ...record, kind: "strength" as const })),
     ...personActivities.map((record) => ({ ...record, kind: "walk" as const })),
+    ...personNoStrengthRecords.map((record) => ({ ...record, kind: "no-strength" as const })),
   ].sort((a, b) => Number(b.date) - Number(a.date));
   const strengthCount = personRecords.length;
   const activityCount = personActivities.length;
@@ -327,12 +349,12 @@ export default function Home() {
           <div className="view-stack">
             <section className="hero-card">
               <div className="hero-kicker">今天的溫和肌力</div>
-              <h1>一組十下，穩穩完成就很好</h1>
-              <p>{person.label}今天四個動作都以空手完成；總分鐘數與身體感受尚未回報。</p>
+              <h1>今天尚未回報肌力</h1>
+              <p>{person.label}今天的肌力、其他活動與身體感受尚未回報。</p>
               <div className="hero-summary">
                 <div>
                   <span>今天</span>
-                  <strong>10 下 × 1 組</strong>
+                  <strong>尚未回報</strong>
                 </div>
                 <div>
                   <span>其他活動</span>
@@ -354,6 +376,7 @@ export default function Home() {
                 <div className="status-keys" aria-label="週曆圖例">
                   <span className="status-key"><i /> 肌力</span>
                   <span className="status-key walk-key"><i /> 散步</span>
+                  <span className="status-key no-strength-key"><i /> 未做肌力</span>
                 </div>
               </div>
               <div className="week-grid">
@@ -363,11 +386,13 @@ export default function Home() {
                       ? "done"
                       : personActivities.some((record) => record.date === day.date)
                         ? "walk"
-                        : "empty";
+                        : personNoStrengthRecords.some((record) => record.date === day.date)
+                          ? "no-strength"
+                          : "empty";
                     return <div key={day.date} className={`day-cell ${status}`}>
                     <span>{day.weekday}</span>
                     <strong>{day.date}</strong>
-                    <small>{status === "done" ? "肌力" : status === "walk" ? "散步" : "—"}</small>
+                    <small>{status === "done" ? "肌力" : status === "walk" ? "散步" : status === "no-strength" ? "未做肌力" : "—"}</small>
                     </div>;
                   })()
                 ))}
@@ -388,11 +413,11 @@ export default function Home() {
 
             <section aria-labelledby="exercise-title">
               <div className="section-heading">
-                <div>
-                  <div className="section-kicker">共同起點</div>
-                  <h2 id="exercise-title">今天完成的四個動作</h2>
-                </div>
-                <span className="section-aside">各 1 組即可</span>
+                  <div>
+                    <div className="section-kicker">共同起點</div>
+                  <h2 id="exercise-title">本週的四個動作</h2>
+                  </div>
+                <span className="section-aside">本週調整為各 2 組</span>
               </div>
               <div className="exercise-list">
                 {exercises.map((exercise) => (
@@ -444,7 +469,16 @@ export default function Home() {
                 <div><div className="section-kicker">2026 年 8 月</div><h2 id="record-title">{strengthCount} 次肌力・{activityCount} 次散步</h2></div>
                 <span className="positive-badge">本週肌力目標已達成</span>
               </div>
-              {timelineRecords.map((record) => record.kind === "walk" ? (
+              {timelineRecords.map((record) => record.kind === "no-strength" ? (
+                <div className="record-entry no-strength-entry" key={`no-strength-${record.date}`}>
+                  <div className="record-date"><strong>{record.date}</strong><span>{record.day}</span></div>
+                  <div className="record-content">
+                    <strong>未進行肌力訓練</strong>
+                    <p>{record.summary}</p>
+                    <small>不列入肌力訓練次數，也不對未回報的內容做推測。</small>
+                  </div>
+                </div>
+              ) : record.kind === "walk" ? (
                 <div className="record-entry walk-entry" key={`walk-${record.date}`}>
                   <div className="record-date"><strong>{record.date}</strong><span>{record.day}</span></div>
                   <div className="record-content">
@@ -460,15 +494,15 @@ export default function Home() {
                 <div className="record-entry" key={`strength-${record.date}`}>
                   <div className="record-date"><strong>{record.date}</strong><span>{record.day}</span></div>
                   <div className="record-content">
-                    <strong>{record.label}・四個動作全部完成</strong>
+                    <strong>{record.label}・{record.completedMoves === 3 ? "完成前三個動作" : "四個動作全部完成"}</strong>
                     <p>{record.summary}</p>
                     <div className="record-moves" aria-label={`${record.label} 完成的四個動作`}>
                       <span>椅子坐站：{record.chairStandReps ? `${record.chairStandReps} 下` : "未記錄下數"} × {record.sets} 組</span>
                       <span>扶牆踮腳：{record.calfRaiseReps ? `${record.calfRaiseReps} 下` : "未記錄下數"} × {record.sets} 組</span>
                       <span>空手划船：{record.rowReps ? `${record.rowReps} 下` : "未記錄下數"} × {record.sets} 組</span>
-                      <span>扶桌髖鉸鏈：{record.hipHingeReps ? `${record.hipHingeReps} 下` : "未記錄下數"} × {record.sets} 組</span>
+                      <span>扶桌髖鉸鏈：{record.hipHingeReps ? `${record.hipHingeReps} 下` : record.completedMoves === 3 ? "未完成" : "未記錄下數"}{record.hipHingeReps ? ` × ${record.sets} 組` : ""}</span>
                     </div>
-                    <small>四個動作皆為空手，未使用彈力帶或額外負重。</small>
+                    <small>{record.completedMoves === 3 ? "前三個動作皆為空手；扶桌髖鉸鏈未進行。" : "四個動作皆為空手，未使用彈力帶或額外負重。"}</small>
                   </div>
                 </div>
               ))}
