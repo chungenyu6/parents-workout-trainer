@@ -243,6 +243,9 @@ const week = [
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
+    { date: "23", day: "週日", label: "Day 10", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
+    { date: "22", day: "週六", label: "Day 9", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
+    { date: "21", day: "週五", label: "Day 8", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
     { date: "19", day: "週三", label: "Day 7", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
     { date: "18", day: "週二", label: "Day 6", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
     { date: "17", day: "週一", label: "Day 5", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, sets: 2, completedMoves: 3, summary: "前三個動作各完成 10 下 × 2 組；扶桌髖鉸鏈未進行。其他細節與身體感受未回報。" },
@@ -252,6 +255,9 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
     { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
+    { date: "23", day: "週日", label: "Day 11", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
+    { date: "22", day: "週六", label: "Day 10", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
+    { date: "21", day: "週五", label: "Day 9", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
     { date: "19", day: "週三", label: "Day 8", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
     { date: "18", day: "週二", label: "Day 7", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
     { date: "17", day: "週一", label: "Day 6", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
