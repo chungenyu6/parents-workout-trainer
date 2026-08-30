@@ -60,6 +60,9 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .hero-kicker, .section-kicker { color: var(--green); font-size: .76rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 .hero-card h1, .page-intro h1 { max-width: 560px; margin: 8px 0 8px; font-family: var(--font-serif), serif; font-size: clamp(1.85rem, 6vw, 3.4rem); line-height: 1.13; letter-spacing: -.025em; }
 .hero-card > p { max-width: 540px; margin: 0; color: #46604f; font-size: 1.02rem; line-height: 1.65; }
+.travel-notice { padding: 21px 22px; border: 1px solid #c8d7d4; border-radius: 24px; background: #e8f1ef; }
+.travel-notice h2 { margin: 5px 0 7px; color: #27493c; font-size: 1.2rem; }
+.travel-notice p { margin: 0; color: #52675e; line-height: 1.65; }
 .hero-summary { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 24px; }
 .hero-summary div { padding-top: 14px; border-top: 1px solid rgba(39, 84, 54, .25); }
 .hero-summary span, .hero-summary strong { display: block; }

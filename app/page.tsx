@@ -243,6 +243,7 @@ const week = [
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
+    { date: "24", day: "週一", label: "Day 11", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "在機場完成四個動作，各 10 下 × 2 組（依回報暫記）；其他細節與身體感受未回報。" },
     { date: "23", day: "週日", label: "Day 10", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
     { date: "22", day: "週六", label: "Day 9", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
     { date: "21", day: "週五", label: "Day 8", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
@@ -255,6 +256,8 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
     { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
+    { date: "29", day: "週六", label: "Day 13", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 1, completedMoves: 4, summary: "四個動作各完成 10 下 × 1 組；其他細節與身體感受未回報。" },
+    { date: "24", day: "週一", label: "Day 12", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "在機場完成四個動作，各 10 下 × 2 組（依回報暫記）；其他細節與身體感受未回報。" },
     { date: "23", day: "週日", label: "Day 11", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
     { date: "22", day: "週六", label: "Day 10", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
     { date: "21", day: "週五", label: "Day 9", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
@@ -311,6 +314,13 @@ export default function Home() {
   const activityCount = personActivities.length;
   const concept = conceptCards[conceptIndex];
   const dailyIndex = useMemo(() => new Date().getDate() % conceptCards.length, []);
+  const travelNotice = (
+    <aside className="travel-notice">
+      <span className="section-kicker">8 月 24 日至 9 月 2 日</span>
+      <h2>歐洲旅行期間，以行程與休息為優先</h2>
+      <p>爸爸、媽媽將外出旅行。這段時間未回報肌力，不表示失敗，也不推測為主動休息；若有合適的活動，再視情況留下紀錄。</p>
+    </aside>
+  );
 
   const copyReport = async () => {
     const template = `日期：\n今天：□ 完成  □ 做一點  □ 休息\n椅子坐站：___ 下 × ___ 組\n扶牆踮腳：___ 下 × ___ 組\n划船：___ 下 × ___ 組（□ 空手  □ 彈力帶：___）\n扶桌髖鉸鏈：___ 下 × ___ 組（□ 空手  □ 負重：___ kg）\n大約：___ 分鐘\n協助：□ 自己完成  □ 有扶持  □ 有人協助\n身體：□ 舒服  □ 有點累  □ 不舒服（哪裡：___）\n下次：□ 願意再做  □ 看狀況  □ 想先調整`;
@@ -374,6 +384,8 @@ export default function Home() {
                 </div>
               </div>
             </section>
+
+            {travelNotice}
 
             <section aria-labelledby="week-title">
               <div className="section-heading">
@@ -472,6 +484,7 @@ export default function Home() {
               <h1>每次出現，都留下一點軌跡</h1>
               <p>這裡只記運動與身體感受，不放病歷、用藥或其他私人資料。</p>
             </section>
+            {travelNotice}
             <section className="record-month" aria-labelledby="record-title">
               <div className="section-heading">
                 <div><div className="section-kicker">2026 年 8 月</div><h2 id="record-title">{strengthCount} 次肌力・{activityCount} 次散步</h2></div>
