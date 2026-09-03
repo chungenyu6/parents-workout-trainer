@@ -16,6 +16,7 @@ type ConceptCard = {
 type WorkoutRecord = {
   date: string;
   day: string;
+  sortDate?: string;
   label: string;
   minutes?: number;
   chairStandReps?: number;
@@ -30,6 +31,7 @@ type WorkoutRecord = {
 type ActivityRecord = {
   date: string;
   day: string;
+  sortDate?: string;
   activity: "散步";
   minutes?: number;
 };
@@ -37,6 +39,7 @@ type ActivityRecord = {
 type NoStrengthRecord = {
   date: string;
   day: string;
+  sortDate?: string;
   summary: string;
 };
 
@@ -232,17 +235,18 @@ const conceptCards: ConceptCard[] = [
 ];
 
 const week = [
-  { weekday: "一", date: "17" },
-  { weekday: "二", date: "18" },
-  { weekday: "三", date: "19" },
-  { weekday: "四", date: "20" },
-  { weekday: "五", date: "21" },
-  { weekday: "六", date: "22" },
-  { weekday: "日", date: "23" },
+  { weekday: "一", date: "31" },
+  { weekday: "二", date: "1" },
+  { weekday: "三", date: "2" },
+  { weekday: "四", date: "3" },
+  { weekday: "五", date: "4" },
+  { weekday: "六", date: "5" },
+  { weekday: "日", date: "6" },
 ];
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
+    { date: "3", day: "週四", sortDate: "2026-09-03", label: "Day 13", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
     { date: "31", day: "週一", label: "Day 12", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 1, completedMoves: 4, summary: "四個動作各完成 10 下 × 1 組；其他細節與身體感受未回報。" },
     { date: "24", day: "週一", label: "Day 11", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "在機場完成四個動作，各 10 下 × 2 組（依回報暫記）；其他細節與身體感受未回報。" },
     { date: "23", day: "週日", label: "Day 10", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
@@ -257,6 +261,7 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
     { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
+    { date: "3", day: "週四", sortDate: "2026-09-03", label: "Day 14", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
     { date: "29", day: "週六", label: "Day 13", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 1, completedMoves: 4, summary: "四個動作各完成 10 下 × 1 組；其他細節與身體感受未回報。" },
     { date: "24", day: "週一", label: "Day 12", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "在機場完成四個動作，各 10 下 × 2 組（依回報暫記）；其他細節與身體感受未回報。" },
     { date: "23", day: "週日", label: "Day 11", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
@@ -311,7 +316,11 @@ export default function Home() {
     ...personRecords.map((record) => ({ ...record, kind: "strength" as const })),
     ...personActivities.map((record) => ({ ...record, kind: "walk" as const })),
     ...personNoStrengthRecords.map((record) => ({ ...record, kind: "no-strength" as const })),
-  ].sort((a, b) => Number(b.date) - Number(a.date));
+  ].sort((a, b) => {
+    const aDate = a.sortDate ?? `2026-08-${a.date.padStart(2, "0")}`;
+    const bDate = b.sortDate ?? `2026-08-${b.date.padStart(2, "0")}`;
+    return bDate.localeCompare(aDate);
+  });
   const strengthCount = personRecords.length;
   const activityCount = personActivities.length;
   const concept = conceptCards[conceptIndex];
@@ -489,7 +498,7 @@ export default function Home() {
             {travelNotice}
             <section className="record-month" aria-labelledby="record-title">
               <div className="section-heading">
-                <div><div className="section-kicker">2026 年 8 月</div><h2 id="record-title">{strengthCount} 次肌力・{activityCount} 次散步</h2></div>
+                <div><div className="section-kicker">2026 年 8–9 月</div><h2 id="record-title">{strengthCount} 次肌力・{activityCount} 次散步</h2></div>
                 <span className="positive-badge">本週肌力目標已達成</span>
               </div>
               {timelineRecords.map((record) => record.kind === "no-strength" ? (
