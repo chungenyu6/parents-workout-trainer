@@ -246,6 +246,7 @@ const week = [
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
+    { date: "4", day: "週五", sortDate: "2026-09-04", label: "Day 14", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
     { date: "3", day: "週四", sortDate: "2026-09-03", label: "Day 13", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
     { date: "31", day: "週一", label: "Day 12", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 1, completedMoves: 4, summary: "四個動作各完成 10 下 × 1 組；其他細節與身體感受未回報。" },
     { date: "24", day: "週一", label: "Day 11", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "在機場完成四個動作，各 10 下 × 2 組（依回報暫記）；其他細節與身體感受未回報。" },
@@ -261,6 +262,7 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
     { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
+    { date: "4", day: "週五", sortDate: "2026-09-04", label: "Day 15", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
     { date: "3", day: "週四", sortDate: "2026-09-03", label: "Day 14", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "四個動作各完成 10 下 × 2 組；其他細節與身體感受未回報。" },
     { date: "29", day: "週六", label: "Day 13", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 1, completedMoves: 4, summary: "四個動作各完成 10 下 × 1 組；其他細節與身體感受未回報。" },
     { date: "24", day: "週一", label: "Day 12", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 2, completedMoves: 4, summary: "在機場完成四個動作，各 10 下 × 2 組（依回報暫記）；其他細節與身體感受未回報。" },
