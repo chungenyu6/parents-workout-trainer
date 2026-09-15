@@ -26,6 +26,8 @@ type WorkoutRecord = {
   sets: number;
   summary: string;
   completedMoves?: 3 | 4;
+  additionalBandSets?: number;
+  equipmentStatus?: "unknown";
 };
 
 type ActivityRecord = {
@@ -235,17 +237,20 @@ const conceptCards: ConceptCard[] = [
 ];
 
 const week = [
-  { weekday: "一", date: "7" },
-  { weekday: "二", date: "8" },
-  { weekday: "三", date: "9" },
-  { weekday: "四", date: "10" },
-  { weekday: "五", date: "11" },
-  { weekday: "六", date: "12" },
-  { weekday: "日", date: "13" },
+  { weekday: "一", date: "14" },
+  { weekday: "二", date: "15" },
+  { weekday: "三", date: "16" },
+  { weekday: "四", date: "17" },
+  { weekday: "五", date: "18" },
+  { weekday: "六", date: "19" },
+  { weekday: "日", date: "20" },
 ];
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
+    { date: "15", day: "週二", sortDate: "2026-09-15", label: "Day 20", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, equipmentStatus: "unknown", summary: "四個動作各完成 10 下 × 3 組；是否使用彈力帶待補。" },
+    { date: "13", day: "週日", sortDate: "2026-09-13", label: "Day 19", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, additionalBandSets: 1, summary: "四個動作各完成 10 下 × 3 組；另完成 1 組彈力帶動作，對應動作與下數待補。" },
+    { date: "10", day: "週四", sortDate: "2026-09-10", label: "Day 18", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
     { date: "9", day: "週三", sortDate: "2026-09-09", label: "Day 17", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
     { date: "7", day: "週一", sortDate: "2026-09-07", label: "Day 16", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
     { date: "6", day: "週日", sortDate: "2026-09-06", label: "Day 15", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
@@ -265,6 +270,9 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
     { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
+    { date: "15", day: "週二", sortDate: "2026-09-15", label: "Day 21", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, equipmentStatus: "unknown", summary: "四個動作各完成 10 下 × 3 組；是否使用彈力帶待補。" },
+    { date: "13", day: "週日", sortDate: "2026-09-13", label: "Day 20", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作皆徒手完成，各 10 下 × 3 組；其他細節與身體感受未回報。" },
+    { date: "10", day: "週四", sortDate: "2026-09-10", label: "Day 19", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
     { date: "9", day: "週三", sortDate: "2026-09-09", label: "Day 18", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
     { date: "7", day: "週一", sortDate: "2026-09-07", label: "Day 17", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
     { date: "6", day: "週日", sortDate: "2026-09-06", label: "Day 16", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
@@ -300,9 +308,13 @@ const activityRecords: Record<PersonId, ActivityRecord[]> = {
 
 const noStrengthRecords: Record<PersonId, NoStrengthRecord[]> = {
   dad: [
+    { date: "12", day: "週六", sortDate: "2026-09-12", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
+    { date: "11", day: "週五", sortDate: "2026-09-11", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "16", day: "週日", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
   ],
   mom: [
+    { date: "12", day: "週六", sortDate: "2026-09-12", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
+    { date: "11", day: "週五", sortDate: "2026-09-11", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "31", day: "週一", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "16", day: "週日", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
   ],
@@ -543,8 +555,9 @@ export default function Home() {
                       <span>扶牆踮腳：{record.calfRaiseReps ? `${record.calfRaiseReps} 下` : "未記錄下數"} × {record.sets} 組</span>
                       <span>空手划船：{record.rowReps ? `${record.rowReps} 下` : "未記錄下數"} × {record.sets} 組</span>
                       <span>扶桌髖鉸鏈：{record.hipHingeReps ? `${record.hipHingeReps} 下` : record.completedMoves === 3 ? "未完成" : "未記錄下數"}{record.hipHingeReps ? ` × ${record.sets} 組` : ""}</span>
+                      {record.additionalBandSets ? <span>彈力帶動作：{record.additionalBandSets} 組（動作、下數待補）</span> : null}
                     </div>
-                    <small>{record.completedMoves === 3 ? "前三個動作皆為空手；扶桌髖鉸鏈未進行。" : "四個動作皆為空手，未使用彈力帶或額外負重。"}</small>
+                    <small>{record.additionalBandSets ? "另有彈力帶動作；對應動作與下數待補。" : record.equipmentStatus === "unknown" ? "是否使用彈力帶或額外負重待補。" : record.completedMoves === 3 ? "前三個動作皆為空手；扶桌髖鉸鏈未進行。" : "四個動作皆為空手，未使用彈力帶或額外負重。"}</small>
                   </div>
                 </div>
               ))}
