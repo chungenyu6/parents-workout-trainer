@@ -583,7 +583,7 @@ export default function Home() {
                 <span className="positive-badge">本週肌力目標已達成</span>
               </div>
               {timelineRecords.map((record) => record.kind === "no-strength" ? (
-                <div className="record-entry no-strength-entry" key={`no-strength-${record.date}`}>
+                <div className="record-entry no-strength-entry" key={`no-strength-${record.sortDate ?? `${record.date}-${record.day}`}`}>
                   <div className="record-date"><strong>{record.date}</strong><span>{record.day}</span></div>
                   <div className="record-content">
                     <strong>未進行肌力訓練</strong>
@@ -592,7 +592,7 @@ export default function Home() {
                   </div>
                 </div>
               ) : record.kind === "walk" ? (
-                <div className="record-entry walk-entry" key={`walk-${record.date}`}>
+                <div className="record-entry walk-entry" key={`walk-${record.sortDate ?? `${record.date}-${record.day}`}`}>
                   <div className="record-date"><strong>{record.date}</strong><span>{record.day}</span></div>
                   <div className="record-content">
                     <strong>散步・{record.minutes ? `${record.minutes} 分鐘` : "時間未回報"}</strong>
@@ -604,7 +604,7 @@ export default function Home() {
                   </div>
                 </div>
               ) : (
-                <div className="record-entry" key={`strength-${record.date}`}>
+                <div className="record-entry" key={`strength-${record.sortDate ?? `${record.date}-${record.label}`}`}>
                   <div className="record-date"><strong>{record.date}</strong><span>{record.day}</span></div>
                   <div className="record-content">
                     <strong>{record.label}・{record.completedMoves === 3 ? "完成前三個動作" : "四個動作全部完成"}</strong>
