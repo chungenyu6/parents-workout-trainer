@@ -22,12 +22,19 @@ type WorkoutRecord = {
   chairStandReps?: number;
   calfRaiseReps?: number;
   rowReps?: number;
+  rowEquipment?: "red-band";
+  rowBandCount?: number;
   hipHingeReps?: number;
   sets: number;
   summary: string;
   completedMoves?: 3 | 4;
   additionalBandSets?: number;
-  equipmentStatus?: "unknown";
+  bandSetScope?: "row";
+  bandReps?: number;
+  bandColor?: "red";
+  bandCount?: number;
+  bandResistance?: "light-unknown";
+  equipmentStatus?: "unknown" | "band";
 };
 
 type ActivityRecord = {
@@ -248,8 +255,11 @@ const week = [
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
-    { date: "15", day: "週二", sortDate: "2026-09-15", label: "Day 20", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, equipmentStatus: "unknown", summary: "四個動作各完成 10 下 × 3 組；是否使用彈力帶待補。" },
-    { date: "13", day: "週日", sortDate: "2026-09-13", label: "Day 19", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, additionalBandSets: 1, summary: "四個動作各完成 10 下 × 3 組；另完成 1 組彈力帶動作，對應動作與下數待補。" },
+    { date: "18", day: "週五", sortDate: "2026-09-18", label: "Day 23", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, rowEquipment: "red-band", rowBandCount: 2, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "完成四個動作，各 30 下 × 5 組；僅拉背使用 2 條紅色彈力帶，其餘徒手。" },
+    { date: "17", day: "週四", sortDate: "2026-09-17", label: "Day 22", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, rowEquipment: "red-band", rowBandCount: 2, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "早上完成四個動作，各 30 下 × 5 組；僅拉背使用 2 條紅色彈力帶，其餘徒手。" },
+    { date: "16", day: "週三", sortDate: "2026-09-16", label: "Day 21", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "四個動作各完成 30 下 × 5 組；做完感覺蠻累。" },
+    { date: "15", day: "週二", sortDate: "2026-09-15", label: "Day 20", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, additionalBandSets: 1, bandSetScope: "row", bandReps: 10, bandColor: "red", bandCount: 2, bandResistance: "light-unknown", equipmentStatus: "band", summary: "四個動作各完成 10 下 × 3 組；空手划船另加 1 組紅色彈力帶 10 下（每次 2 條）。" },
+    { date: "13", day: "週日", sortDate: "2026-09-13", label: "Day 19", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, additionalBandSets: 1, bandSetScope: "row", bandReps: 10, bandColor: "red", bandCount: 2, bandResistance: "light-unknown", equipmentStatus: "band", summary: "四個動作各完成 10 下 × 3 組；空手划船另加 1 組紅色彈力帶 10 下（每次 2 條）。" },
     { date: "10", day: "週四", sortDate: "2026-09-10", label: "Day 18", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
     { date: "9", day: "週三", sortDate: "2026-09-09", label: "Day 17", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
     { date: "7", day: "週一", sortDate: "2026-09-07", label: "Day 16", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
@@ -270,7 +280,8 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
     { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
-    { date: "15", day: "週二", sortDate: "2026-09-15", label: "Day 21", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, equipmentStatus: "unknown", summary: "四個動作各完成 10 下 × 3 組；是否使用彈力帶待補。" },
+    { date: "17", day: "週四", sortDate: "2026-09-17", label: "Day 22", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, rowEquipment: "red-band", rowBandCount: 2, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "早上完成四個動作，各 30 下 × 5 組；僅拉背使用 2 條紅色彈力帶，其餘徒手。" },
+    { date: "15", day: "週二", sortDate: "2026-09-15", label: "Day 21", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, additionalBandSets: 1, bandSetScope: "row", bandReps: 10, bandColor: "red", bandCount: 2, bandResistance: "light-unknown", equipmentStatus: "band", summary: "四個動作各完成 10 下 × 3 組；空手划船另加 1 組紅色彈力帶 10 下（每次 2 條）。" },
     { date: "13", day: "週日", sortDate: "2026-09-13", label: "Day 20", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作皆徒手完成，各 10 下 × 3 組；其他細節與身體感受未回報。" },
     { date: "10", day: "週四", sortDate: "2026-09-10", label: "Day 19", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
     { date: "9", day: "週三", sortDate: "2026-09-09", label: "Day 18", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
@@ -313,6 +324,8 @@ const noStrengthRecords: Record<PersonId, NoStrengthRecord[]> = {
     { date: "16", day: "週日", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
   ],
   mom: [
+    { date: "18", day: "週五", sortDate: "2026-09-18", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
+    { date: "16", day: "週三", sortDate: "2026-09-16", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "12", day: "週六", sortDate: "2026-09-12", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "11", day: "週五", sortDate: "2026-09-11", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "31", day: "週一", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
@@ -345,6 +358,25 @@ export default function Home() {
   });
   const strengthCount = personRecords.length;
   const activityCount = personActivities.length;
+  const septemberStrengthRecords = personRecords.filter((record) => record.sortDate?.startsWith("2026-09-"));
+  const septemberWalkRecords = personActivities.filter((record) => record.sortDate?.startsWith("2026-09-"));
+  const septemberNoStrengthRecords = personNoStrengthRecords.filter((record) => record.sortDate?.startsWith("2026-09-"));
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+  const monthDays = Array.from({ length: 30 }, (_, index) => {
+    const date = String(index + 1);
+    const strength = septemberStrengthRecords.find((record) => record.date === date);
+    const walk = septemberWalkRecords.find((record) => record.date === date);
+    const noStrength = septemberNoStrengthRecords.find((record) => record.date === date);
+    const calendarDate = new Date(2026, 8, index + 1);
+    const isFuture = calendarDate > todayStart;
+
+    if (strength) return { date, status: "strength", detail: `${strength.sets} 組`, label: `9 月 ${date} 日，肌力 ${strength.sets} 組` };
+    if (walk) return { date, status: "walk", detail: walk.minutes ? `${walk.minutes} 分` : "散步", label: `9 月 ${date} 日，散步${walk.minutes ? ` ${walk.minutes} 分鐘` : ""}` };
+    if (noStrength) return { date, status: "no-strength", detail: "未做肌力", label: `9 月 ${date} 日，未進行肌力訓練` };
+    if (isFuture) return { date, status: "future", detail: "", label: `9 月 ${date} 日，尚未到達` };
+    return { date, status: "empty", detail: "未回報", label: `9 月 ${date} 日，尚未回報` };
+  });
   const concept = conceptCards[conceptIndex];
   const dailyIndex = useMemo(() => new Date().getDate() % conceptCards.length, []);
   const travelNotice = (
@@ -470,7 +502,7 @@ export default function Home() {
                     <div className="section-kicker">共同起點</div>
                   <h2 id="exercise-title">本週的四個動作</h2>
                   </div>
-                <span className="section-aside">本週調整為各 2 組</span>
+                <span className="section-aside">目前：各 30 下 × 5 組；拉背用紅色彈力帶</span>
               </div>
               <div className="exercise-list">
                 {exercises.map((exercise) => (
@@ -518,6 +550,33 @@ export default function Home() {
               <p>這裡只記運動與身體感受，不放病歷、用藥或其他私人資料。</p>
             </section>
             {travelNotice}
+            <section className="activity-map" aria-labelledby="activity-map-title">
+              <div className="activity-map-heading">
+                <div>
+                  <span className="section-kicker">2026 年 9 月</span>
+                  <h2 id="activity-map-title">九月活動地圖</h2>
+                  <p>{person.label}本月 {septemberStrengthRecords.length} 次肌力、{septemberWalkRecords.length} 次散步、{septemberNoStrengthRecords.length} 天明確未做肌力。</p>
+                </div>
+                <div className="activity-legend" aria-label="活動地圖圖例">
+                  <span><i className="strength" />肌力</span>
+                  <span><i className="walk" />散步</span>
+                  <span><i className="no-strength" />未做肌力</span>
+                  <span><i className="empty" />未回報</span>
+                </div>
+              </div>
+              <div className="month-grid" role="grid" aria-label={`${person.label} 2026 年 9 月活動紀錄`}>
+                {(["一", "二", "三", "四", "五", "六", "日"] as const).map((weekday) => <span className="month-weekday" role="columnheader" key={weekday}>{weekday}</span>)}
+                <span className="month-offset" aria-hidden="true" />
+                {monthDays.map((day) => (
+                  <div className={`month-day ${day.status}`} role="gridcell" aria-label={day.label} key={day.date}>
+                    <span>{day.date}</span>
+                    <i aria-hidden="true" />
+                    <small>{day.detail}</small>
+                  </div>
+                ))}
+              </div>
+              <p className="activity-map-note">空白只代表尚未回報；只有明確收到「沒有做」時，才標示為未做肌力。</p>
+            </section>
             <section className="record-month" aria-labelledby="record-title">
               <div className="section-heading">
                 <div><div className="section-kicker">2026 年 8–9 月</div><h2 id="record-title">{strengthCount} 次肌力・{activityCount} 次散步</h2></div>
@@ -553,11 +612,11 @@ export default function Home() {
                     <div className="record-moves" aria-label={`${record.label} 完成的四個動作`}>
                       <span>椅子坐站：{record.chairStandReps ? `${record.chairStandReps} 下` : "未記錄下數"} × {record.sets} 組</span>
                       <span>扶牆踮腳：{record.calfRaiseReps ? `${record.calfRaiseReps} 下` : "未記錄下數"} × {record.sets} 組</span>
-                      <span>空手划船：{record.rowReps ? `${record.rowReps} 下` : "未記錄下數"} × {record.sets} 組</span>
+                      <span>{record.rowEquipment === "red-band" ? "彈力帶划船" : "空手划船"}：{record.rowReps ? `${record.rowReps} 下` : "未記錄下數"} × {record.sets} 組{record.rowEquipment === "red-band" ? `（紅色彈力帶 × ${record.rowBandCount ?? "？"} 條）` : ""}</span>
                       <span>扶桌髖鉸鏈：{record.hipHingeReps ? `${record.hipHingeReps} 下` : record.completedMoves === 3 ? "未完成" : "未記錄下數"}{record.hipHingeReps ? ` × ${record.sets} 組` : ""}</span>
-                      {record.additionalBandSets ? <span>彈力帶動作：{record.additionalBandSets} 組（動作、下數待補）</span> : null}
+                      {record.additionalBandSets ? <span>{record.bandSetScope === "row" ? `空手划船另加 ${record.additionalBandSets} 組紅色彈力帶：${record.bandReps ?? "未記錄"} 下 × ${record.bandCount ?? "？"} 條` : `彈力帶動作：${record.additionalBandSets} 組（動作、下數待補）`}</span> : null}
                     </div>
-                    <small>{record.additionalBandSets ? "另有彈力帶動作；對應動作與下數待補。" : record.equipmentStatus === "unknown" ? "是否使用彈力帶或額外負重待補。" : record.completedMoves === 3 ? "前三個動作皆為空手；扶桌髖鉸鏈未進行。" : "四個動作皆為空手，未使用彈力帶或額外負重。"}</small>
+                    <small>{record.rowEquipment === "red-band" ? "僅拉背使用紅色彈力帶，每次 2 條；其餘動作徒手。" : record.bandSetScope === "row" ? "僅空手划船使用紅色彈力帶，每次 2 條；阻力偏輕、磅數未知，彈力帶組每組 10 下。" : record.additionalBandSets ? "另有彈力帶動作；對應動作與下數待補。" : record.equipmentStatus === "band" ? "有使用彈力帶；對應動作與下數待補。" : record.equipmentStatus === "unknown" ? "是否使用彈力帶或額外負重待補。" : record.completedMoves === 3 ? "前三個動作皆為空手；扶桌髖鉸鏈未進行。" : "四個動作皆為空手，未使用彈力帶或額外負重。"}</small>
                   </div>
                 </div>
               ))}
@@ -565,18 +624,6 @@ export default function Home() {
             <section className="empty-guidance">
               <AppIcon name="calendar" />
               <div><h2>下一筆不用更厲害</h2><p>只要再安全完成一次，就是正在建立規律。</p></div>
-            </section>
-            <section className="trend-preview" aria-labelledby="trend-preview-title">
-              <div>
-                <span className="section-kicker">同一動作累積 3 次數字後</span>
-                <h2 id="trend-preview-title">每個動作會有自己的趨勢</h2>
-                <p>分開查看下數、組數與阻力變化，不把四個不同動作混成一個分數。</p>
-              </div>
-              <div className="mini-trends" aria-label="未來趨勢圖示意，尚無足夠資料">
-                <span><i style={{ height: "30%" }} /><i style={{ height: "48%" }} /><i style={{ height: "64%" }} /></span>
-                <span><i style={{ height: "42%" }} /><i style={{ height: "42%" }} /><i style={{ height: "58%" }} /></span>
-                <span><i style={{ height: "24%" }} /><i style={{ height: "38%" }} /><i style={{ height: "38%" }} /></span>
-              </div>
             </section>
           </div>
         )}

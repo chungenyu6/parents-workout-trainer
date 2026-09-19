@@ -116,6 +116,35 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .safety-line strong { display: block; color: #7a3828; }
 .page-intro { padding: 30px 4px 8px; }
 .page-intro p { max-width: 630px; margin: 8px 0 0; color: var(--muted); line-height: 1.7; }
+.activity-map { overflow: hidden; padding: 24px; border-radius: 28px; color: #f7fbf5; background: #203f34; box-shadow: 0 18px 46px rgba(30, 58, 48, .18); }
+.activity-map .section-kicker { color: #c7db8b; }
+.activity-map-heading { display: grid; gap: 18px; }
+.activity-map-heading h2 { margin: 5px 0 7px; font-family: var(--font-serif), serif; font-size: clamp(1.6rem, 5vw, 2.25rem); }
+.activity-map-heading p { max-width: 520px; margin: 0; color: #c7d6cf; line-height: 1.6; }
+.activity-legend { display: flex; flex-wrap: wrap; gap: 8px 14px; }
+.activity-legend span { display: inline-flex; align-items: center; gap: 6px; color: #dae5df; font-size: .72rem; font-weight: 700; }
+.activity-legend i { width: 9px; height: 9px; border: 2px solid #7f958b; border-radius: 50%; }
+.activity-legend i.strength { border-color: #c9e788; background: #c9e788; }
+.activity-legend i.walk { border-color: #f0c96a; background: #f0c96a; }
+.activity-legend i.no-strength { border-color: #b7c1bc; background: #708077; }
+.activity-legend i.empty { border-color: #81958b; background: transparent; }
+.month-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; margin-top: 22px; }
+.month-weekday { padding-bottom: 3px; color: #aebfb7; text-align: center; font-size: .68rem; font-weight: 800; }
+.month-offset { min-height: 68px; }
+.month-day { display: grid; grid-template-rows: auto 1fr auto; justify-items: center; min-width: 0; min-height: 72px; padding: 7px 3px 6px; border: 1px solid rgba(222, 238, 230, .12); border-radius: 14px; background: rgba(255,255,255,.045); }
+.month-day > span { justify-self: start; padding-left: 4px; color: #c6d4cd; font-size: .68rem; font-weight: 800; }
+.month-day > i { align-self: center; width: 18px; height: 18px; border: 2px solid #789087; border-radius: 50%; }
+.month-day > small { max-width: 100%; overflow: hidden; color: #aebfb7; font-size: .59rem; text-overflow: ellipsis; white-space: nowrap; }
+.month-day.strength { border-color: rgba(201, 231, 136, .45); background: rgba(201, 231, 136, .12); }
+.month-day.strength > i { border-color: #c9e788; background: #c9e788; box-shadow: 0 0 0 5px rgba(201, 231, 136, .08); }
+.month-day.strength > small { color: #e4f1c5; }
+.month-day.walk { border-color: rgba(240, 201, 106, .42); background: rgba(240, 201, 106, .1); }
+.month-day.walk > i { border-color: #f0c96a; background: #f0c96a; }
+.month-day.walk > small { color: #f6dfa7; }
+.month-day.no-strength > i { border-color: #aebbb5; background: #718078; }
+.month-day.no-strength > small { color: #c9d3ce; }
+.month-day.future { opacity: .32; }
+.activity-map-note { margin: 16px 0 0; padding-top: 14px; border-top: 1px solid rgba(222, 238, 230, .14); color: #aebfb7; font-size: .72rem; line-height: 1.55; }
 .record-month { padding: 22px; border: 1px solid var(--line); border-radius: 24px; background: var(--surface); }
 .positive-badge { display: inline-flex; align-items: center; gap: 6px; padding: 7px 10px; border-radius: 999px; color: var(--green-dark); background: var(--green-soft); font-size: .74rem; font-weight: 800; }
 .record-entry { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
@@ -132,12 +161,6 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .record-moves span { padding: 6px 9px; border-radius: 999px; color: var(--green-dark); background: var(--green-soft); font-size: .72rem; font-weight: 700; }
 .empty-guidance { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; padding: 20px; border-radius: 22px; background: rgba(255,255,255,.55); }
 .empty-guidance p { margin: 6px 0 0; color: var(--muted); }
-.trend-preview { display: grid; gap: 18px; padding: 22px; border: 1px dashed #bdc8bd; border-radius: 22px; background: rgba(255,255,255,.36); }
-.trend-preview h2 { margin: 5px 0 7px; font-size: 1.2rem; }
-.trend-preview p { margin: 0; color: var(--muted); line-height: 1.6; }
-.mini-trends { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; height: 78px; }
-.mini-trends > span { display: flex; align-items: end; justify-content: center; gap: 5px; padding: 8px; border-bottom: 1px solid #9eab9f; }
-.mini-trends i { width: 8px; border-radius: 5px 5px 0 0; background: var(--green-soft); }
 .progress-card { display: grid; gap: 24px; align-items: center; padding: 26px; border-radius: 28px; background: linear-gradient(135deg, #dfeada, #f6e8bb); }
 .progress-orbit { position: relative; width: 180px; aspect-ratio: 1; margin: 0 auto; border: 1px dashed #8ca080; border-radius: 50%; }
 .orbit-center { position: absolute; inset: 25px; display: grid; place-content: center; border-radius: 50%; text-align: center; background: rgba(255,255,255,.72); }
@@ -176,7 +199,7 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
   .report-card { grid-template-columns: 1fr auto; align-items: center; }
   .primary-action { min-width: 210px; padding: 0 22px; }
   .progress-card { grid-template-columns: 220px 1fr; }
-  .trend-preview { grid-template-columns: 1fr 220px; align-items: center; }
+  .activity-map-heading { grid-template-columns: 1fr auto; align-items: end; }
   .three-principles { grid-template-columns: repeat(3, 1fr); }
   .three-principles article { display: block; }
   .three-principles article > span { margin-bottom: 14px; }
@@ -190,6 +213,11 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
   .hero-summary strong { font-size: .82rem; }
   .week-grid { gap: 3px; }
   .day-cell { padding-inline: 0; border-radius: 12px; }
+  .activity-map { padding: 20px 14px; }
+  .month-grid { gap: 3px; }
+  .month-day { min-height: 65px; border-radius: 11px; }
+  .month-day > i { width: 15px; height: 15px; }
+  .month-day > small { font-size: .54rem; }
   .exercise-card summary { grid-template-columns: auto 1fr; }
   .exercise-reps { grid-column: 2; }
   .exercise-detail { padding-left: 18px; }
