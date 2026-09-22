@@ -255,6 +255,7 @@ const week = [
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
+    { date: "22", day: "週二", sortDate: "2026-09-22", label: "Day 25", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, rowEquipment: "red-band", rowBandCount: 2, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "完成四個動作，各 30 下 × 5 組；僅拉背使用 2 條紅色彈力帶，其餘徒手。" },
     { date: "20", day: "週日", sortDate: "2026-09-20", label: "Day 24", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, rowEquipment: "red-band", rowBandCount: 2, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "完成四個動作，各 30 下 × 5 組；僅拉背使用 2 條紅色彈力帶，其餘徒手。" },
     { date: "18", day: "週五", sortDate: "2026-09-18", label: "Day 23", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, rowEquipment: "red-band", rowBandCount: 2, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "完成四個動作，各 30 下 × 5 組；僅拉背使用 2 條紅色彈力帶，其餘徒手。" },
     { date: "17", day: "週四", sortDate: "2026-09-17", label: "Day 22", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, rowEquipment: "red-band", rowBandCount: 2, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "早上完成四個動作，各 30 下 × 5 組；僅拉背使用 2 條紅色彈力帶，其餘徒手。" },
@@ -281,6 +282,7 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
     { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
+    { date: "22", day: "週二", sortDate: "2026-09-22", label: "Day 24", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, rowEquipment: "red-band", rowBandCount: 2, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "完成四個動作，各 30 下 × 5 組；僅拉背使用 2 條紅色彈力帶，其餘徒手。" },
     { date: "21", day: "週一", sortDate: "2026-09-21", label: "Day 23", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, rowEquipment: "red-band", rowBandCount: 2, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "完成四個動作，各 30 下 × 5 組；僅拉背使用 2 條紅色彈力帶，其餘徒手。" },
     { date: "17", day: "週四", sortDate: "2026-09-17", label: "Day 22", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, rowEquipment: "red-band", rowBandCount: 2, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "早上完成四個動作，各 30 下 × 5 組；僅拉背使用 2 條紅色彈力帶，其餘徒手。" },
     { date: "15", day: "週二", sortDate: "2026-09-15", label: "Day 21", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, additionalBandSets: 1, bandSetScope: "row", bandReps: 10, bandColor: "red", bandCount: 2, bandResistance: "light-unknown", equipmentStatus: "band", summary: "四個動作各完成 10 下 × 3 組；空手划船另加 1 組紅色彈力帶 10 下（每次 2 條）。" },
