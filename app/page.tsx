@@ -65,38 +65,18 @@ const people: Record<PersonId, { label: string; greeting: string; framing: strin
   },
 };
 
-const exercises = [
+const trainingPlans = [
   {
-    number: "01",
-    name: "椅子坐站",
-    functionName: "從椅子站起來更穩",
-    reps: "5–8 下",
-    steps: ["找一張不會滑動的穩固椅子", "雙腳踩穩，身體微微向前", "慢慢站起，再慢慢坐下"],
-    observe: "留意膝蓋疼痛、身體搖晃、憋氣或需要用手撐。",
+    id: "A",
+    days: "週二・週五",
+    dates: "9/29・10/2",
+    exercises: ["彈力帶胸推", "彈力帶側平舉", "深蹲", "提踵"],
   },
   {
-    number: "02",
-    name: "扶牆踮腳",
-    functionName: "走路與站穩的底氣",
-    reps: "8–12 下",
-    steps: ["雙手扶牆或穩固桌面", "腳跟慢慢抬起", "停一下，再慢慢放下"],
-    observe: "留意抽筋、腳踝搖晃或左右差異很大。",
-  },
-  {
-    number: "03",
-    name: "空手划船",
-    functionName: "背挺一點，肩膀更自在",
-    reps: "8–12 下",
-    steps: ["坐姿或站姿都可以，手肘彎曲放在身體兩側", "手肘慢慢往後帶，肩胛骨輕輕靠近", "肩膀不要聳起，再慢慢回來"],
-    observe: "目前先不用彈力帶。留意肩膀疼痛、聳肩或憋氣。",
-  },
-  {
-    number: "04",
-    name: "扶桌髖鉸鏈",
-    functionName: "彎腰拿東西更安心",
-    reps: "5–8 下",
-    steps: ["雙手扶穩固桌面，膝蓋微彎", "屁股慢慢往後推", "身體微微前傾，再回來"],
-    observe: "留意腰部不舒服、背部過度拱起或失去平衡。",
+    id: "B",
+    days: "週三・週六",
+    dates: "9/30・10/3",
+    exercises: ["彈力帶划船", "彈力帶擴胸", "深蹲", "提踵"],
   },
 ];
 
@@ -244,13 +224,12 @@ const conceptCards: ConceptCard[] = [
 ];
 
 const week = [
-  { weekday: "一", date: "14" },
-  { weekday: "二", date: "15" },
-  { weekday: "三", date: "16" },
-  { weekday: "四", date: "17" },
-  { weekday: "五", date: "18" },
-  { weekday: "六", date: "19" },
-  { weekday: "日", date: "20" },
+  { weekday: "一", date: "9/28", sortDate: "2026-09-28" },
+  { weekday: "二", date: "9/29", sortDate: "2026-09-29" },
+  { weekday: "三", date: "9/30", sortDate: "2026-09-30" },
+  { weekday: "四", date: "10/1", sortDate: "2026-10-01" },
+  { weekday: "五", date: "10/2", sortDate: "2026-10-02" },
+  { weekday: "六", date: "10/3", sortDate: "2026-10-03" },
 ];
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
@@ -359,6 +338,7 @@ export default function Home() {
   const personRecords = workoutRecords[personId];
   const personActivities = activityRecords[personId];
   const personNoStrengthRecords = noStrengthRecords[personId];
+  const bandColor = personId === "dad" ? "紅色" : "黃色";
   const timelineRecords = [
     ...personRecords.map((record) => ({ ...record, kind: "strength" as const })),
     ...personActivities.map((record) => ({ ...record, kind: "walk" as const })),
@@ -400,7 +380,7 @@ export default function Home() {
   );
 
   const copyReport = async () => {
-    const template = `日期：\n今天：□ 完成  □ 做一點  □ 休息\n椅子坐站：___ 下 × ___ 組\n扶牆踮腳：___ 下 × ___ 組\n划船：___ 下 × ___ 組（□ 空手  □ 彈力帶：___）\n扶桌髖鉸鏈：___ 下 × ___ 組（□ 空手  □ 負重：___ kg）\n大約：___ 分鐘\n協助：□ 自己完成  □ 有扶持  □ 有人協助\n身體：□ 舒服  □ 有點累  □ 不舒服（哪裡：___）\n下次：□ 願意再做  □ 看狀況  □ 想先調整`;
+    const template = `日期：\n${person.label}：□ A（週二／五） □ B（週三／六）\n今天：□ 完成  □ 做一點  □ 休息\n每個動作：10 下 × 3 組\n彈力帶：${bandColor}\n大約：___ 分鐘\n協助：□ 自己完成  □ 有扶持  □ 有人協助\n身體：□ 舒服  □ 有點累  □ 不舒服（哪裡：___）\n下次：□ 願意再做  □ 看狀況  □ 想先調整`;
     try {
       await navigator.clipboard.writeText(template);
       setCopied(true);
@@ -462,8 +442,6 @@ export default function Home() {
               </div>
             </section>
 
-            {travelNotice}
-
             <section aria-labelledby="week-title">
               <div className="section-heading">
                 <div>
@@ -479,14 +457,14 @@ export default function Home() {
               <div className="week-grid">
                 {week.map((day) => (
                   (() => {
-                    const status = personRecords.some((record) => record.date === day.date)
+                    const status = personRecords.some((record) => record.sortDate === day.sortDate)
                       ? "done"
-                      : personActivities.some((record) => record.date === day.date)
+                      : personActivities.some((record) => record.sortDate === day.sortDate)
                         ? "walk"
-                        : personNoStrengthRecords.some((record) => record.date === day.date)
+                        : personNoStrengthRecords.some((record) => record.sortDate === day.sortDate)
                           ? "no-strength"
                           : "empty";
-                    return <div key={day.date} className={`day-cell ${status}`}>
+                    return <div key={day.sortDate} className={`day-cell ${status}`}>
                     <span>{day.weekday}</span>
                     <strong>{day.date}</strong>
                     <small>{status === "done" ? "肌力" : status === "walk" ? "散步" : status === "no-strength" ? "未做肌力" : "—"}</small>
@@ -508,30 +486,37 @@ export default function Home() {
               </a>
             </section>
 
-            <section aria-labelledby="exercise-title">
+            <section aria-labelledby="exercise-title" className="training-program">
               <div className="section-heading">
                   <div>
-                    <div className="section-kicker">共同起點</div>
-                  <h2 id="exercise-title">本週的四個動作</h2>
+                    <div className="section-kicker">9/28—10/3 新課表</div>
+                  <h2 id="exercise-title">兩種訓練日，交替進行</h2>
                   </div>
-                <span className="section-aside">目前：各 30 下 × 5 組；拉背用紅色彈力帶</span>
+                <span className={`band-chip ${personId === "dad" ? "red" : "yellow"}`}>
+                  <i aria-hidden="true" />{person.label}・{bandColor}彈力帶
+                </span>
               </div>
-              <div className="exercise-list">
-                {exercises.map((exercise) => (
-                  <details className="exercise-card" key={exercise.number}>
-                    <summary>
-                      <span className="exercise-number">{exercise.number}</span>
-                      <span className="exercise-title">
-                        <strong>{exercise.name}</strong>
-                        <small>{exercise.functionName}</small>
-                      </span>
-                      <span className="exercise-reps">{exercise.reps}</span>
-                    </summary>
-                    <div className="exercise-detail">
-                      <ol>{exercise.steps.map((step) => <li key={step}>{step}</li>)}</ol>
-                      <p><strong>留意：</strong>{exercise.observe}</p>
-                    </div>
-                  </details>
+              <div className="training-plan-grid">
+                {trainingPlans.map((plan) => (
+                  <article className="training-plan-card" key={plan.id}>
+                    <header>
+                      <span className="plan-letter">{plan.id}</span>
+                      <div>
+                        <strong>{plan.days}</strong>
+                        <small>{plan.dates}</small>
+                      </div>
+                      <span className="plan-dose">10 下 × 3 組</span>
+                    </header>
+                    <ol>
+                      {plan.exercises.map((exercise, index) => (
+                        <li key={exercise}>
+                          <span>{index + 1}</span>
+                          <strong>{exercise}</strong>
+                          <small>{exercise.startsWith("彈力帶") ? `${bandColor}彈力帶` : "徒手"}</small>
+                        </li>
+                      ))}
+                    </ol>
+                  </article>
                 ))}
               </div>
             </section>

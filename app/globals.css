@@ -76,7 +76,7 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .status-key i { width: 9px; height: 9px; border-radius: 50%; background: var(--green); }
 .status-key.walk-key i { background: #c48a31; }
 .status-key.no-strength-key i { background: #a1aaa4; }
-.week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.week-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
 .day-cell { min-width: 0; padding: 11px 2px 9px; border: 1px solid var(--line); border-radius: 15px; text-align: center; background: rgba(255,255,255,.42); }
 .day-cell span, .day-cell strong, .day-cell small { display: block; }
 .day-cell span { color: var(--muted); font-size: .72rem; }
@@ -96,18 +96,24 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .daily-concept h2 { max-width: 600px; margin: 18px 0 8px; font-family: var(--font-serif), serif; font-size: clamp(1.45rem, 5vw, 2.25rem); line-height: 1.28; }
 .daily-concept p { margin: 0 0 15px; color: #5b5645; line-height: 1.7; }
 .daily-concept a, .learn-card a { color: var(--green-dark); font-size: .82rem; font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-.exercise-list { display: grid; gap: 9px; }
-.exercise-card { overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
-.exercise-card summary { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 13px; min-height: 78px; padding: 14px 16px; cursor: pointer; list-style: none; }
-.exercise-card summary::-webkit-details-marker { display: none; }
-.exercise-number { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 13px; color: var(--green-dark); background: var(--green-soft); font-size: .75rem; font-weight: 800; }
-.exercise-title strong, .exercise-title small { display: block; }
-.exercise-title strong { font-size: 1.02rem; }
-.exercise-title small { margin-top: 3px; color: var(--muted); }
-.exercise-reps { white-space: nowrap; color: var(--green); font-size: .82rem; font-weight: 800; }
-.exercise-detail { padding: 0 18px 18px 69px; border-top: 1px solid #eef0eb; }
-.exercise-detail ol { margin: 15px 0 12px; padding-left: 20px; line-height: 1.7; }
-.exercise-detail p { margin: 0; color: var(--muted); line-height: 1.6; }
+.band-chip { display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--green-dark); background: var(--surface); font-size: .76rem; font-weight: 800; white-space: nowrap; }
+.band-chip i { width: 10px; height: 10px; border-radius: 50%; }
+.band-chip.red i { background: #b64736; box-shadow: 0 0 0 3px #f4d9d2; }
+.band-chip.yellow i { background: #e4b934; box-shadow: 0 0 0 3px #fbefbd; }
+.training-plan-grid { display: grid; gap: 12px; }
+.training-plan-card { overflow: hidden; border: 1px solid var(--line); border-radius: 22px; background: var(--surface); box-shadow: 0 8px 24px rgba(38, 57, 46, .06); }
+.training-plan-card header { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; padding: 16px 17px; border-bottom: 1px solid var(--line); background: linear-gradient(110deg, var(--green-soft), #f4f0d6); }
+.plan-letter { display: grid; place-items: center; width: 43px; height: 43px; border-radius: 50%; color: #fff; background: var(--green-dark); font-family: var(--font-serif), serif; font-size: 1.15rem; font-weight: 800; }
+.training-plan-card header strong, .training-plan-card header small { display: block; }
+.training-plan-card header strong { font-size: 1.02rem; }
+.training-plan-card header small { margin-top: 2px; color: var(--muted); font-size: .75rem; }
+.plan-dose { padding: 7px 9px; border-radius: 10px; color: var(--green-dark); background: rgba(255,255,255,.72); font-size: .76rem; font-weight: 800; white-space: nowrap; }
+.training-plan-card ol { display: grid; gap: 0; margin: 0; padding: 5px 17px 9px; list-style: none; }
+.training-plan-card li { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 9px; min-height: 48px; border-bottom: 1px solid #eceee8; }
+.training-plan-card li:last-child { border-bottom: 0; }
+.training-plan-card li > span { color: #849088; font-family: var(--font-serif), serif; font-size: .8rem; font-weight: 800; }
+.training-plan-card li strong { font-size: .94rem; }
+.training-plan-card li small { color: var(--muted); font-size: .72rem; }
 .report-card { display: grid; gap: 18px; padding: 22px; border-radius: 24px; background: var(--green-soft); }
 .report-card p { margin: 7px 0 0; color: var(--muted); line-height: 1.6; }
 .primary-action { min-height: 52px; border: 0; border-radius: 15px; color: #fff; background: var(--green); cursor: pointer; font-weight: 800; }
@@ -200,6 +206,7 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
   .primary-action { min-width: 210px; padding: 0 22px; }
   .progress-card { grid-template-columns: 220px 1fr; }
   .activity-map-heading { grid-template-columns: 1fr auto; align-items: end; }
+  .training-plan-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .three-principles { grid-template-columns: repeat(3, 1fr); }
   .three-principles article { display: block; }
   .three-principles article > span { margin-bottom: 14px; }
@@ -218,9 +225,11 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
   .month-day { min-height: 65px; border-radius: 11px; }
   .month-day > i { width: 15px; height: 15px; }
   .month-day > small { font-size: .54rem; }
-  .exercise-card summary { grid-template-columns: auto 1fr; }
-  .exercise-reps { grid-column: 2; }
-  .exercise-detail { padding-left: 18px; }
+  .section-heading { align-items: start; }
+  .training-program .section-heading { display: grid; }
+  .band-chip { justify-self: start; }
+  .training-plan-card header { grid-template-columns: auto 1fr; }
+  .plan-dose { grid-column: 2; justify-self: start; }
 }
 
 @media (prefers-reduced-motion: reduce) {
