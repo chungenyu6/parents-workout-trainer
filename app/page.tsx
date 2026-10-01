@@ -27,13 +27,22 @@ type WorkoutRecord = {
   hipHingeReps?: number;
   sets: number;
   summary: string;
-  completedMoves?: 3 | 4;
+  completedMoves?: 2 | 3 | 4;
+  planId?: "A" | "B";
+  exerciseResults?: Array<{
+    name: string;
+    reps: number;
+    sets: number;
+    equipment: "red-band" | "yellow-band" | "bodyweight";
+  }>;
+  skippedExercises?: string[];
+  conditionNote?: string;
   additionalBandSets?: number;
   bandSetScope?: "row";
   bandReps?: number;
   bandColor?: "red";
   bandCount?: number;
-  bandResistance?: "light-unknown";
+  bandResistance?: "light";
   equipmentStatus?: "unknown" | "band";
 };
 
@@ -78,6 +87,15 @@ const trainingPlans = [
     dates: "9/30・10/3",
     exercises: ["彈力帶划船", "彈力帶擴胸", "深蹲", "提踵"],
   },
+];
+
+const bandCatalog = [
+  { color: "黃色", className: "yellow", level: "超輕", pounds: "2–5 lbs", use: "復健初期、肩頸放鬆、銀髮族" },
+  { color: "紅色", className: "red", level: "輕", pounds: "6–10 lbs", use: "初學者上肢、瑜珈輔助" },
+  { color: "綠色", className: "green", level: "中", pounds: "10–15 lbs", use: "日常訓練、女生全身可用" },
+  { color: "藍色", className: "blue", level: "中強", pounds: "15–20 lbs", use: "臀腿訓練、男生上肢" },
+  { color: "黑色", className: "black", level: "強", pounds: "20–30 lbs", use: "進階肌力、深蹲加阻" },
+  { color: "紫／銀", className: "purple", level: "超強", pounds: "30+ lbs", use: "力量訓練者專用" },
 ];
 
 const conceptCards: ConceptCard[] = [
@@ -234,14 +252,20 @@ const week = [
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
+    { date: "30", day: "週三", sortDate: "2026-09-30", label: "Day 27", planId: "B", sets: 4, completedMoves: 4, exerciseResults: [
+      { name: "彈力帶划船", reps: 10, sets: 4, equipment: "red-band" },
+      { name: "彈力帶擴胸", reps: 10, sets: 4, equipment: "red-band" },
+      { name: "深蹲", reps: 10, sets: 4, equipment: "bodyweight" },
+      { name: "提踵", reps: 10, sets: 4, equipment: "bodyweight" },
+    ], summary: "完成 B 日四個動作，各 10 下 × 4 組；上半身使用紅色彈力帶（6–10 lbs），深蹲與提踵徒手。" },
     { date: "23", day: "週三", sortDate: "2026-09-23", label: "Day 26", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, rowEquipment: "red-band", rowBandCount: 2, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "完成四個動作，各 30 下 × 5 組；僅拉背使用 2 條紅色彈力帶，其餘徒手。" },
     { date: "22", day: "週二", sortDate: "2026-09-22", label: "Day 25", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, rowEquipment: "red-band", rowBandCount: 2, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "完成四個動作，各 30 下 × 5 組；僅拉背使用 2 條紅色彈力帶，其餘徒手。" },
     { date: "20", day: "週日", sortDate: "2026-09-20", label: "Day 24", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, rowEquipment: "red-band", rowBandCount: 2, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "完成四個動作，各 30 下 × 5 組；僅拉背使用 2 條紅色彈力帶，其餘徒手。" },
     { date: "18", day: "週五", sortDate: "2026-09-18", label: "Day 23", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, rowEquipment: "red-band", rowBandCount: 2, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "完成四個動作，各 30 下 × 5 組；僅拉背使用 2 條紅色彈力帶，其餘徒手。" },
     { date: "17", day: "週四", sortDate: "2026-09-17", label: "Day 22", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, rowEquipment: "red-band", rowBandCount: 2, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "早上完成四個動作，各 30 下 × 5 組；僅拉背使用 2 條紅色彈力帶，其餘徒手。" },
     { date: "16", day: "週三", sortDate: "2026-09-16", label: "Day 21", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "四個動作各完成 30 下 × 5 組；做完感覺蠻累。" },
-    { date: "15", day: "週二", sortDate: "2026-09-15", label: "Day 20", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, additionalBandSets: 1, bandSetScope: "row", bandReps: 10, bandColor: "red", bandCount: 2, bandResistance: "light-unknown", equipmentStatus: "band", summary: "四個動作各完成 10 下 × 3 組；空手划船另加 1 組紅色彈力帶 10 下（每次 2 條）。" },
-    { date: "13", day: "週日", sortDate: "2026-09-13", label: "Day 19", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, additionalBandSets: 1, bandSetScope: "row", bandReps: 10, bandColor: "red", bandCount: 2, bandResistance: "light-unknown", equipmentStatus: "band", summary: "四個動作各完成 10 下 × 3 組；空手划船另加 1 組紅色彈力帶 10 下（每次 2 條）。" },
+    { date: "15", day: "週二", sortDate: "2026-09-15", label: "Day 20", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, additionalBandSets: 1, bandSetScope: "row", bandReps: 10, bandColor: "red", bandCount: 2, bandResistance: "light", equipmentStatus: "band", summary: "四個動作各完成 10 下 × 3 組；空手划船另加 1 組紅色彈力帶 10 下（每次 2 條）。" },
+    { date: "13", day: "週日", sortDate: "2026-09-13", label: "Day 19", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, additionalBandSets: 1, bandSetScope: "row", bandReps: 10, bandColor: "red", bandCount: 2, bandResistance: "light", equipmentStatus: "band", summary: "四個動作各完成 10 下 × 3 組；空手划船另加 1 組紅色彈力帶 10 下（每次 2 條）。" },
     { date: "10", day: "週四", sortDate: "2026-09-10", label: "Day 18", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
     { date: "9", day: "週三", sortDate: "2026-09-09", label: "Day 17", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
     { date: "7", day: "週一", sortDate: "2026-09-07", label: "Day 16", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
@@ -262,10 +286,14 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
     { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
+    { date: "30", day: "週三", sortDate: "2026-09-30", label: "Day 25", planId: "B", sets: 3, completedMoves: 2, exerciseResults: [
+      { name: "彈力帶划船", reps: 10, sets: 3, equipment: "yellow-band" },
+      { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "yellow-band" },
+    ], skippedExercises: ["深蹲", "提踵"], conditionNote: "依回報：跌倒造成雙膝受傷；左膝疑似瘀青，右膝有大面積擦破皮。", summary: "依回報暫記完成 B 日上半身兩個動作，各 10 下 × 3 組，使用黃色彈力帶（2–5 lbs）；腿部動作未進行。" },
     { date: "22", day: "週二", sortDate: "2026-09-22", label: "Day 24", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, rowEquipment: "red-band", rowBandCount: 2, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "完成四個動作，各 30 下 × 5 組；僅拉背使用 2 條紅色彈力帶，其餘徒手。" },
     { date: "21", day: "週一", sortDate: "2026-09-21", label: "Day 23", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, rowEquipment: "red-band", rowBandCount: 2, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "完成四個動作，各 30 下 × 5 組；僅拉背使用 2 條紅色彈力帶，其餘徒手。" },
     { date: "17", day: "週四", sortDate: "2026-09-17", label: "Day 22", chairStandReps: 30, calfRaiseReps: 30, rowReps: 30, rowEquipment: "red-band", rowBandCount: 2, hipHingeReps: 30, sets: 5, completedMoves: 4, summary: "早上完成四個動作，各 30 下 × 5 組；僅拉背使用 2 條紅色彈力帶，其餘徒手。" },
-    { date: "15", day: "週二", sortDate: "2026-09-15", label: "Day 21", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, additionalBandSets: 1, bandSetScope: "row", bandReps: 10, bandColor: "red", bandCount: 2, bandResistance: "light-unknown", equipmentStatus: "band", summary: "四個動作各完成 10 下 × 3 組；空手划船另加 1 組紅色彈力帶 10 下（每次 2 條）。" },
+    { date: "15", day: "週二", sortDate: "2026-09-15", label: "Day 21", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, additionalBandSets: 1, bandSetScope: "row", bandReps: 10, bandColor: "red", bandCount: 2, bandResistance: "light", equipmentStatus: "band", summary: "四個動作各完成 10 下 × 3 組；空手划船另加 1 組紅色彈力帶 10 下（每次 2 條）。" },
     { date: "13", day: "週日", sortDate: "2026-09-13", label: "Day 20", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作皆徒手完成，各 10 下 × 3 組；其他細節與身體感受未回報。" },
     { date: "10", day: "週四", sortDate: "2026-09-10", label: "Day 19", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
     { date: "9", day: "週三", sortDate: "2026-09-09", label: "Day 18", chairStandReps: 10, calfRaiseReps: 10, rowReps: 10, hipHingeReps: 10, sets: 3, completedMoves: 4, summary: "四個動作各完成 10 下 × 3 組；其他細節與身體感受未回報。" },
@@ -339,6 +367,7 @@ export default function Home() {
   const personActivities = activityRecords[personId];
   const personNoStrengthRecords = noStrengthRecords[personId];
   const bandColor = personId === "dad" ? "紅色" : "黃色";
+  const bandPounds = personId === "dad" ? "6–10 lbs" : "2–5 lbs";
   const timelineRecords = [
     ...personRecords.map((record) => ({ ...record, kind: "strength" as const })),
     ...personActivities.map((record) => ({ ...record, kind: "walk" as const })),
@@ -380,7 +409,7 @@ export default function Home() {
   );
 
   const copyReport = async () => {
-    const template = `日期：\n${person.label}：□ A（週二／五） □ B（週三／六）\n今天：□ 完成  □ 做一點  □ 休息\n每個動作：10 下 × 3 組\n彈力帶：${bandColor}\n大約：___ 分鐘\n協助：□ 自己完成  □ 有扶持  □ 有人協助\n身體：□ 舒服  □ 有點累  □ 不舒服（哪裡：___）\n下次：□ 願意再做  □ 看狀況  □ 想先調整`;
+    const template = `日期：\n${person.label}：□ A（週二／五） □ B（週三／六）\n今天：□ 完成  □ 做一點  □ 休息\n每個動作：10 下 × 3 組\n彈力帶：${bandColor}（${bandPounds}）\n大約：___ 分鐘\n協助：□ 自己完成  □ 有扶持  □ 有人協助\n身體：□ 舒服  □ 有點累  □ 不舒服（哪裡：___）\n下次：□ 願意再做  □ 看狀況  □ 想先調整`;
     try {
       await navigator.clipboard.writeText(template);
       setCopied(true);
@@ -493,7 +522,7 @@ export default function Home() {
                   <h2 id="exercise-title">兩種訓練日，交替進行</h2>
                   </div>
                 <span className={`band-chip ${personId === "dad" ? "red" : "yellow"}`}>
-                  <i aria-hidden="true" />{person.label}・{bandColor}彈力帶
+                  <i aria-hidden="true" />{person.label}・{bandColor}彈力帶 {bandPounds}
                 </span>
               </div>
               <div className="training-plan-grid">
@@ -519,6 +548,19 @@ export default function Home() {
                   </article>
                 ))}
               </div>
+              <details className="band-reference">
+                <summary>查看完整彈力帶阻力表</summary>
+                <div className="band-table" role="table" aria-label="彈力帶顏色與阻力對照">
+                  {bandCatalog.map((band) => (
+                    <div className="band-row" role="row" key={band.color}>
+                      <span role="cell" className="band-color"><i className={band.className} aria-hidden="true" />{band.color}</span>
+                      <strong role="cell">{band.level}</strong>
+                      <span role="cell">{band.pounds}</span>
+                      <small role="cell">{band.use}</small>
+                    </div>
+                  ))}
+                </div>
+              </details>
             </section>
 
             <section className="report-card">
@@ -604,16 +646,30 @@ export default function Home() {
                 <div className="record-entry" key={`strength-${record.sortDate ?? `${record.date}-${record.label}`}`}>
                   <div className="record-date"><strong>{record.date}</strong><span>{record.day}</span></div>
                   <div className="record-content">
-                    <strong>{record.label}・{record.completedMoves === 3 ? "完成前三個動作" : "四個動作全部完成"}</strong>
+                    <strong>{record.label}・{record.planId ? `${record.planId} 日${record.completedMoves === 4 ? "全部完成" : `完成 ${record.completedMoves} 個動作`}` : record.completedMoves === 3 ? "完成前三個動作" : "四個動作全部完成"}</strong>
                     <p>{record.summary}</p>
-                    <div className="record-moves" aria-label={`${record.label} 完成的四個動作`}>
-                      <span>椅子坐站：{record.chairStandReps ? `${record.chairStandReps} 下` : "未記錄下數"} × {record.sets} 組</span>
-                      <span>扶牆踮腳：{record.calfRaiseReps ? `${record.calfRaiseReps} 下` : "未記錄下數"} × {record.sets} 組</span>
-                      <span>{record.rowEquipment === "red-band" ? "彈力帶划船" : "空手划船"}：{record.rowReps ? `${record.rowReps} 下` : "未記錄下數"} × {record.sets} 組{record.rowEquipment === "red-band" ? `（紅色彈力帶 × ${record.rowBandCount ?? "？"} 條）` : ""}</span>
-                      <span>扶桌髖鉸鏈：{record.hipHingeReps ? `${record.hipHingeReps} 下` : record.completedMoves === 3 ? "未完成" : "未記錄下數"}{record.hipHingeReps ? ` × ${record.sets} 組` : ""}</span>
-                      {record.additionalBandSets ? <span>{record.bandSetScope === "row" ? `空手划船另加 ${record.additionalBandSets} 組紅色彈力帶：${record.bandReps ?? "未記錄"} 下 × ${record.bandCount ?? "？"} 條` : `彈力帶動作：${record.additionalBandSets} 組（動作、下數待補）`}</span> : null}
-                    </div>
-                    <small>{record.rowEquipment === "red-band" ? "僅拉背使用紅色彈力帶，每次 2 條；其餘動作徒手。" : record.bandSetScope === "row" ? "僅空手划船使用紅色彈力帶，每次 2 條；阻力偏輕、磅數未知，彈力帶組每組 10 下。" : record.additionalBandSets ? "另有彈力帶動作；對應動作與下數待補。" : record.equipmentStatus === "band" ? "有使用彈力帶；對應動作與下數待補。" : record.equipmentStatus === "unknown" ? "是否使用彈力帶或額外負重待補。" : record.completedMoves === 3 ? "前三個動作皆為空手；扶桌髖鉸鏈未進行。" : "四個動作皆為空手，未使用彈力帶或額外負重。"}</small>
+                    {record.exerciseResults ? (
+                      <>
+                        <div className="record-moves" aria-label={`${record.label} 完成的動作`}>
+                          {record.exerciseResults.map((exercise) => (
+                            <span key={exercise.name}>{exercise.name}：{exercise.reps} 下 × {exercise.sets} 組（{exercise.equipment === "red-band" ? "紅色彈力帶・6–10 lbs" : exercise.equipment === "yellow-band" ? "黃色彈力帶・2–5 lbs" : "徒手"}）</span>
+                          ))}
+                          {record.skippedExercises?.map((exercise) => <span className="skipped-move" key={exercise}>{exercise}：未進行</span>)}
+                        </div>
+                        {record.conditionNote ? <small className="condition-note">身體狀況：{record.conditionNote}</small> : null}
+                      </>
+                    ) : (
+                      <>
+                        <div className="record-moves" aria-label={`${record.label} 完成的四個動作`}>
+                          <span>椅子坐站：{record.chairStandReps ? `${record.chairStandReps} 下` : "未記錄下數"} × {record.sets} 組</span>
+                          <span>扶牆踮腳：{record.calfRaiseReps ? `${record.calfRaiseReps} 下` : "未記錄下數"} × {record.sets} 組</span>
+                          <span>{record.rowEquipment === "red-band" ? "彈力帶划船" : "空手划船"}：{record.rowReps ? `${record.rowReps} 下` : "未記錄下數"} × {record.sets} 組{record.rowEquipment === "red-band" ? `（紅色彈力帶 × ${record.rowBandCount ?? "？"} 條）` : ""}</span>
+                          <span>扶桌髖鉸鏈：{record.hipHingeReps ? `${record.hipHingeReps} 下` : record.completedMoves === 3 ? "未完成" : "未記錄下數"}{record.hipHingeReps ? ` × ${record.sets} 組` : ""}</span>
+                          {record.additionalBandSets ? <span>{record.bandSetScope === "row" ? `空手划船另加 ${record.additionalBandSets} 組紅色彈力帶：${record.bandReps ?? "未記錄"} 下 × ${record.bandCount ?? "？"} 條` : `彈力帶動作：${record.additionalBandSets} 組（動作、下數待補）`}</span> : null}
+                        </div>
+                        <small>{record.rowEquipment === "red-band" ? "僅拉背使用紅色彈力帶，每次 2 條；單條標示約 6–10 lbs，其餘動作徒手。" : record.bandSetScope === "row" ? "僅空手划船使用紅色彈力帶，每次 2 條；單條標示約 6–10 lbs，彈力帶組每組 10 下。" : record.additionalBandSets ? "另有彈力帶動作；對應動作與下數待補。" : record.equipmentStatus === "band" ? "有使用彈力帶；對應動作與下數待補。" : record.equipmentStatus === "unknown" ? "是否使用彈力帶或額外負重待補。" : record.completedMoves === 3 ? "前三個動作皆為空手；扶桌髖鉸鏈未進行。" : "四個動作皆為空手，未使用彈力帶或額外負重。"}</small>
+                      </>
+                    )}
                   </div>
                 </div>
               ))}

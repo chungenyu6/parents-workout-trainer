@@ -114,6 +114,20 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .training-plan-card li > span { color: #849088; font-family: var(--font-serif), serif; font-size: .8rem; font-weight: 800; }
 .training-plan-card li strong { font-size: .94rem; }
 .training-plan-card li small { color: var(--muted); font-size: .72rem; }
+.band-reference { margin-top: 12px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,.5); }
+.band-reference summary { padding: 14px 16px; color: var(--green-dark); cursor: pointer; font-size: .84rem; font-weight: 800; }
+.band-table { display: grid; padding: 0 12px 12px; }
+.band-row { display: grid; grid-template-columns: 82px 48px 74px 1fr; align-items: center; gap: 8px; min-height: 44px; padding: 6px 4px; border-top: 1px solid var(--line); }
+.band-row > span, .band-row > strong { font-size: .78rem; }
+.band-row > small { color: var(--muted); font-size: .7rem; line-height: 1.35; }
+.band-color { display: inline-flex; align-items: center; gap: 7px; font-weight: 800; }
+.band-color i { width: 11px; height: 11px; border: 1px solid rgba(0,0,0,.12); border-radius: 50%; }
+.band-color i.yellow { background: #e4b934; }
+.band-color i.red { background: #b64736; }
+.band-color i.green { background: #438153; }
+.band-color i.blue { background: #4878a8; }
+.band-color i.black { background: #292c2a; }
+.band-color i.purple { background: linear-gradient(135deg, #765389 48%, #c8ccca 52%); }
 .report-card { display: grid; gap: 18px; padding: 22px; border-radius: 24px; background: var(--green-soft); }
 .report-card p { margin: 7px 0 0; color: var(--muted); line-height: 1.6; }
 .primary-action { min-height: 52px; border: 0; border-radius: 15px; color: #fff; background: var(--green); cursor: pointer; font-weight: 800; }
@@ -165,6 +179,8 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .record-content > small { display: block; margin-top: 10px; color: var(--muted); line-height: 1.5; }
 .record-moves { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 13px; }
 .record-moves span { padding: 6px 9px; border-radius: 999px; color: var(--green-dark); background: var(--green-soft); font-size: .72rem; font-weight: 700; }
+.record-moves .skipped-move { color: #6f5950; background: #eee9e5; }
+.record-content > .condition-note { padding: 9px 11px; border-left: 3px solid var(--rust); border-radius: 0 10px 10px 0; color: #6a4134; background: #f8e5dd; }
 .empty-guidance { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; padding: 20px; border-radius: 22px; background: rgba(255,255,255,.55); }
 .empty-guidance p { margin: 6px 0 0; color: var(--muted); }
 .progress-card { display: grid; gap: 24px; align-items: center; padding: 26px; border-radius: 28px; background: linear-gradient(135deg, #dfeada, #f6e8bb); }
@@ -230,6 +246,7 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
   .band-chip { justify-self: start; }
   .training-plan-card header { grid-template-columns: auto 1fr; }
   .plan-dose { grid-column: 2; justify-self: start; }
+  .band-row { grid-template-columns: 76px 42px 68px 1fr; gap: 5px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
