@@ -79,7 +79,7 @@ const trainingPlans = [
     id: "A",
     days: "週二・週五",
     dates: "9/29・10/2",
-    exercises: ["彈力帶胸推", "彈力帶側平舉", "深蹲", "提踵"],
+    exercises: ["彈力帶胸推", "彈力帶肩推", "深蹲", "提踵"],
   },
   {
     id: "B",
@@ -260,7 +260,7 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
     ], summary: "完成 B 日四個動作，各 10 下 × 3 組；上半身使用紅色彈力帶（6–10 lbs），深蹲與提踵徒手。" },
     { date: "2", day: "週五", sortDate: "2026-10-02", label: "Day 28", planId: "A", sets: 3, completedMoves: 4, exerciseResults: [
       { name: "彈力帶胸推", reps: 10, sets: 3, equipment: "red-band" },
-      { name: "彈力帶側平舉", reps: 10, sets: 3, equipment: "red-band" },
+      { name: "彈力帶肩推", reps: 10, sets: 3, equipment: "red-band" },
       { name: "深蹲", reps: 10, sets: 3, equipment: "bodyweight" },
       { name: "提踵", reps: 10, sets: 3, equipment: "bodyweight" },
     ], summary: "完成 A 日四個動作，各 10 下 × 3 組；上半身使用紅色彈力帶（6–10 lbs），深蹲與提踵徒手。" },
@@ -300,7 +300,7 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   mom: [
     { date: "2", day: "週五", sortDate: "2026-10-02", label: "Day 26", planId: "A", sets: 3, completedMoves: 4, exerciseResults: [
       { name: "彈力帶胸推", reps: 10, sets: 3, equipment: "yellow-band" },
-      { name: "彈力帶側平舉", reps: 10, sets: 3, equipment: "yellow-band" },
+      { name: "彈力帶肩推", reps: 10, sets: 3, equipment: "yellow-band" },
       { name: "深蹲", reps: 10, sets: 3, equipment: "bodyweight" },
       { name: "提踵", reps: 10, sets: 3, equipment: "bodyweight" },
     ], summary: "完成 A 日四個動作，各 10 下 × 3 組；上半身使用黃色彈力帶（2–5 lbs），深蹲與提踵徒手。" },
