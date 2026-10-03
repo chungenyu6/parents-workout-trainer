@@ -252,6 +252,12 @@ const week = [
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
+    { date: "3", day: "週六", sortDate: "2026-10-03", label: "Day 29", planId: "B", sets: 3, completedMoves: 4, exerciseResults: [
+      { name: "彈力帶划船", reps: 10, sets: 3, equipment: "red-band" },
+      { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "red-band" },
+      { name: "深蹲", reps: 10, sets: 3, equipment: "bodyweight" },
+      { name: "提踵", reps: 10, sets: 3, equipment: "bodyweight" },
+    ], summary: "完成 B 日四個動作，各 10 下 × 3 組；上半身使用紅色彈力帶（6–10 lbs），深蹲與提踵徒手。" },
     { date: "2", day: "週五", sortDate: "2026-10-02", label: "Day 28", planId: "A", sets: 3, completedMoves: 4, exerciseResults: [
       { name: "彈力帶胸推", reps: 10, sets: 3, equipment: "red-band" },
       { name: "彈力帶側平舉", reps: 10, sets: 3, equipment: "red-band" },
@@ -352,6 +358,7 @@ const noStrengthRecords: Record<PersonId, NoStrengthRecord[]> = {
     { date: "16", day: "週日", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
   ],
   mom: [
+    { date: "3", day: "週六", sortDate: "2026-10-03", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "23", day: "週三", sortDate: "2026-09-23", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "20", day: "週日", sortDate: "2026-09-20", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "19", day: "週六", sortDate: "2026-09-19", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
