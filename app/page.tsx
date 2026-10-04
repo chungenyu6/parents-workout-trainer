@@ -298,6 +298,14 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
     { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
+    { date: "4", day: "週日", sortDate: "2026-10-04", label: "Day 28", planId: "B", sets: 3, completedMoves: 2, exerciseResults: [
+      { name: "彈力帶划船", reps: 10, sets: 3, equipment: "yellow-band" },
+      { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "yellow-band" },
+    ], summary: "使用黃色彈力帶（2–5 lbs）完成 B 日剩餘的兩個上半身動作，各 10 下 × 3 組；與 10 月 3 日的徒手部分合併完成整套 B 日訓練。" },
+    { date: "3", day: "週六", sortDate: "2026-10-03", label: "Day 27", planId: "B", sets: 3, completedMoves: 2, exerciseResults: [
+      { name: "深蹲", reps: 10, sets: 3, equipment: "bodyweight" },
+      { name: "提踵", reps: 10, sets: 3, equipment: "bodyweight" },
+    ], summary: "完成 B 日徒手部分，深蹲與提踵各 10 下 × 3 組；當天未使用彈力帶，上半身彈力帶動作於 10 月 4 日補完。" },
     { date: "2", day: "週五", sortDate: "2026-10-02", label: "Day 26", planId: "A", sets: 3, completedMoves: 4, exerciseResults: [
       { name: "彈力帶胸推", reps: 10, sets: 3, equipment: "yellow-band" },
       { name: "彈力帶肩推", reps: 10, sets: 3, equipment: "yellow-band" },
@@ -358,7 +366,6 @@ const noStrengthRecords: Record<PersonId, NoStrengthRecord[]> = {
     { date: "16", day: "週日", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
   ],
   mom: [
-    { date: "3", day: "週六", sortDate: "2026-10-03", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "23", day: "週三", sortDate: "2026-09-23", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "20", day: "週日", sortDate: "2026-09-20", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "19", day: "週六", sortDate: "2026-09-19", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
