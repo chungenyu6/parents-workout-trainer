@@ -78,13 +78,13 @@ const trainingPlans = [
   {
     id: "A",
     days: "週二・週五",
-    dates: "9/29・10/2",
+    dates: "10/6・10/9",
     exercises: ["彈力帶胸推", "彈力帶肩推", "深蹲", "提踵"],
   },
   {
     id: "B",
     days: "週三・週六",
-    dates: "9/30・10/3",
+    dates: "10/7・10/10",
     exercises: ["彈力帶划船", "彈力帶擴胸", "深蹲", "提踵"],
   },
 ];
@@ -242,16 +242,28 @@ const conceptCards: ConceptCard[] = [
 ];
 
 const week = [
-  { weekday: "一", date: "9/28", sortDate: "2026-09-28" },
-  { weekday: "二", date: "9/29", sortDate: "2026-09-29" },
-  { weekday: "三", date: "9/30", sortDate: "2026-09-30" },
-  { weekday: "四", date: "10/1", sortDate: "2026-10-01" },
-  { weekday: "五", date: "10/2", sortDate: "2026-10-02" },
-  { weekday: "六", date: "10/3", sortDate: "2026-10-03" },
+  { weekday: "一", date: "10/5", sortDate: "2026-10-05" },
+  { weekday: "二", date: "10/6", sortDate: "2026-10-06" },
+  { weekday: "三", date: "10/7", sortDate: "2026-10-07" },
+  { weekday: "四", date: "10/8", sortDate: "2026-10-08" },
+  { weekday: "五", date: "10/9", sortDate: "2026-10-09" },
+  { weekday: "六", date: "10/10", sortDate: "2026-10-10" },
 ];
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
+    { date: "7", day: "週三", sortDate: "2026-10-07", label: "Day 31", planId: "B", sets: 3, completedMoves: 4, exerciseResults: [
+      { name: "彈力帶划船", reps: 10, sets: 3, equipment: "red-band" },
+      { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "red-band" },
+      { name: "深蹲", reps: 10, sets: 3, equipment: "bodyweight" },
+      { name: "提踵", reps: 10, sets: 3, equipment: "bodyweight" },
+    ], summary: "完成 B 日四個動作，各 10 下 × 3 組；上半身使用紅色彈力帶（6–10 lbs），深蹲與提踵徒手。" },
+    { date: "6", day: "週二", sortDate: "2026-10-06", label: "Day 30", planId: "A", sets: 3, completedMoves: 4, exerciseResults: [
+      { name: "彈力帶胸推", reps: 10, sets: 3, equipment: "red-band" },
+      { name: "彈力帶肩推", reps: 10, sets: 3, equipment: "red-band" },
+      { name: "深蹲", reps: 10, sets: 3, equipment: "bodyweight" },
+      { name: "提踵", reps: 10, sets: 3, equipment: "bodyweight" },
+    ], summary: "完成 A 日四個動作，各 10 下 × 3 組；上半身使用紅色彈力帶（6–10 lbs），深蹲與提踵徒手。" },
     { date: "3", day: "週六", sortDate: "2026-10-03", label: "Day 29", planId: "B", sets: 3, completedMoves: 4, exerciseResults: [
       { name: "彈力帶划船", reps: 10, sets: 3, equipment: "red-band" },
       { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "red-band" },
@@ -298,6 +310,18 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
     { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
+    { date: "7", day: "週三", sortDate: "2026-10-07", label: "Day 30", planId: "B", sets: 3, completedMoves: 4, exerciseResults: [
+      { name: "彈力帶划船", reps: 10, sets: 3, equipment: "yellow-band" },
+      { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "yellow-band" },
+      { name: "深蹲", reps: 10, sets: 3, equipment: "bodyweight" },
+      { name: "提踵", reps: 10, sets: 3, equipment: "bodyweight" },
+    ], summary: "完成 B 日四個動作，各 10 下 × 3 組；上半身使用黃色彈力帶（2–5 lbs），深蹲與提踵徒手。" },
+    { date: "6", day: "週二", sortDate: "2026-10-06", label: "Day 29", planId: "A", sets: 3, completedMoves: 4, exerciseResults: [
+      { name: "彈力帶胸推", reps: 10, sets: 3, equipment: "yellow-band" },
+      { name: "彈力帶肩推", reps: 10, sets: 3, equipment: "yellow-band" },
+      { name: "深蹲", reps: 10, sets: 3, equipment: "bodyweight" },
+      { name: "提踵", reps: 10, sets: 3, equipment: "bodyweight" },
+    ], summary: "完成 A 日四個動作，各 10 下 × 3 組；上半身使用黃色彈力帶（2–5 lbs），深蹲與提踵徒手。" },
     { date: "4", day: "週日", sortDate: "2026-10-04", label: "Day 28", planId: "B", sets: 3, completedMoves: 2, exerciseResults: [
       { name: "彈力帶划船", reps: 10, sets: 3, equipment: "yellow-band" },
       { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "yellow-band" },
@@ -405,24 +429,24 @@ export default function Home() {
   });
   const strengthCount = personRecords.length;
   const activityCount = personActivities.length;
-  const septemberStrengthRecords = personRecords.filter((record) => record.sortDate?.startsWith("2026-09-"));
-  const septemberWalkRecords = personActivities.filter((record) => record.sortDate?.startsWith("2026-09-"));
-  const septemberNoStrengthRecords = personNoStrengthRecords.filter((record) => record.sortDate?.startsWith("2026-09-"));
+  const octoberStrengthRecords = personRecords.filter((record) => record.sortDate?.startsWith("2026-10-"));
+  const octoberWalkRecords = personActivities.filter((record) => record.sortDate?.startsWith("2026-10-"));
+  const octoberNoStrengthRecords = personNoStrengthRecords.filter((record) => record.sortDate?.startsWith("2026-10-"));
   const todayStart = new Date();
   todayStart.setHours(0, 0, 0, 0);
-  const monthDays = Array.from({ length: 30 }, (_, index) => {
+  const monthDays = Array.from({ length: 31 }, (_, index) => {
     const date = String(index + 1);
-    const strength = septemberStrengthRecords.find((record) => record.date === date);
-    const walk = septemberWalkRecords.find((record) => record.date === date);
-    const noStrength = septemberNoStrengthRecords.find((record) => record.date === date);
-    const calendarDate = new Date(2026, 8, index + 1);
+    const strength = octoberStrengthRecords.find((record) => record.date === date);
+    const walk = octoberWalkRecords.find((record) => record.date === date);
+    const noStrength = octoberNoStrengthRecords.find((record) => record.date === date);
+    const calendarDate = new Date(2026, 9, index + 1);
     const isFuture = calendarDate > todayStart;
 
-    if (strength) return { date, status: "strength", detail: `${strength.sets} 組`, label: `9 月 ${date} 日，肌力 ${strength.sets} 組` };
-    if (walk) return { date, status: "walk", detail: walk.minutes ? `${walk.minutes} 分` : "散步", label: `9 月 ${date} 日，散步${walk.minutes ? ` ${walk.minutes} 分鐘` : ""}` };
-    if (noStrength) return { date, status: "no-strength", detail: "未做肌力", label: `9 月 ${date} 日，未進行肌力訓練` };
-    if (isFuture) return { date, status: "future", detail: "", label: `9 月 ${date} 日，尚未到達` };
-    return { date, status: "empty", detail: "未回報", label: `9 月 ${date} 日，尚未回報` };
+    if (strength) return { date, status: "strength", detail: `${strength.sets} 組`, label: `10 月 ${date} 日，肌力 ${strength.sets} 組` };
+    if (walk) return { date, status: "walk", detail: walk.minutes ? `${walk.minutes} 分` : "散步", label: `10 月 ${date} 日，散步${walk.minutes ? ` ${walk.minutes} 分鐘` : ""}` };
+    if (noStrength) return { date, status: "no-strength", detail: "未做肌力", label: `10 月 ${date} 日，未進行肌力訓練` };
+    if (isFuture) return { date, status: "future", detail: "", label: `10 月 ${date} 日，尚未到達` };
+    return { date, status: "empty", detail: "未回報", label: `10 月 ${date} 日，尚未回報` };
   });
   const concept = conceptCards[conceptIndex];
   const dailyIndex = useMemo(() => new Date().getDate() % conceptCards.length, []);
@@ -544,7 +568,7 @@ export default function Home() {
             <section aria-labelledby="exercise-title" className="training-program">
               <div className="section-heading">
                   <div>
-                    <div className="section-kicker">9/28—10/3 新課表</div>
+                    <div className="section-kicker">10/5—10/10 本週課表</div>
                   <h2 id="exercise-title">兩種訓練日，交替進行</h2>
                   </div>
                 <span className={`band-chip ${personId === "dad" ? "red" : "yellow"}`}>
@@ -618,9 +642,9 @@ export default function Home() {
             <section className="activity-map" aria-labelledby="activity-map-title">
               <div className="activity-map-heading">
                 <div>
-                  <span className="section-kicker">2026 年 9 月</span>
-                  <h2 id="activity-map-title">九月活動地圖</h2>
-                  <p>{person.label}本月 {septemberStrengthRecords.length} 次肌力、{septemberWalkRecords.length} 次散步、{septemberNoStrengthRecords.length} 天明確未做肌力。</p>
+                  <span className="section-kicker">2026 年 10 月</span>
+                  <h2 id="activity-map-title">十月活動地圖</h2>
+                  <p>{person.label}本月 {octoberStrengthRecords.length} 次肌力、{octoberWalkRecords.length} 次散步、{octoberNoStrengthRecords.length} 天明確未做肌力。</p>
                 </div>
                 <div className="activity-legend" aria-label="活動地圖圖例">
                   <span><i className="strength" />肌力</span>
@@ -629,9 +653,9 @@ export default function Home() {
                   <span><i className="empty" />未回報</span>
                 </div>
               </div>
-              <div className="month-grid" role="grid" aria-label={`${person.label} 2026 年 9 月活動紀錄`}>
+              <div className="month-grid" role="grid" aria-label={`${person.label} 2026 年 10 月活動紀錄`}>
                 {(["一", "二", "三", "四", "五", "六", "日"] as const).map((weekday) => <span className="month-weekday" role="columnheader" key={weekday}>{weekday}</span>)}
-                <span className="month-offset" aria-hidden="true" />
+                {Array.from({ length: 3 }, (_, index) => <span className="month-offset" aria-hidden="true" key={`offset-${index}`} />)}
                 {monthDays.map((day) => (
                   <div className={`month-day ${day.status}`} role="gridcell" aria-label={day.label} key={day.date}>
                     <span>{day.date}</span>
@@ -644,7 +668,7 @@ export default function Home() {
             </section>
             <section className="record-month" aria-labelledby="record-title">
               <div className="section-heading">
-                <div><div className="section-kicker">2026 年 8–9 月</div><h2 id="record-title">{strengthCount} 次肌力・{activityCount} 次散步</h2></div>
+                <div><div className="section-kicker">2026 年 8–10 月</div><h2 id="record-title">{strengthCount} 次肌力・{activityCount} 次散步</h2></div>
                 <span className="positive-badge">本週肌力目標已達成</span>
               </div>
               {timelineRecords.map((record) => record.kind === "no-strength" ? (
