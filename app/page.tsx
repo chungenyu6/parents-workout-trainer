@@ -78,13 +78,13 @@ const trainingPlans = [
   {
     id: "A",
     days: "週二・週五",
-    dates: "10/6・10/9",
+    dates: "10/13・10/16",
     exercises: ["彈力帶胸推", "彈力帶肩推", "深蹲", "提踵"],
   },
   {
     id: "B",
     days: "週三・週六",
-    dates: "10/7・10/10",
+    dates: "10/14・10/17",
     exercises: ["彈力帶划船", "彈力帶擴胸", "深蹲", "提踵"],
   },
 ];
@@ -242,16 +242,22 @@ const conceptCards: ConceptCard[] = [
 ];
 
 const week = [
-  { weekday: "一", date: "10/5", sortDate: "2026-10-05" },
-  { weekday: "二", date: "10/6", sortDate: "2026-10-06" },
-  { weekday: "三", date: "10/7", sortDate: "2026-10-07" },
-  { weekday: "四", date: "10/8", sortDate: "2026-10-08" },
-  { weekday: "五", date: "10/9", sortDate: "2026-10-09" },
-  { weekday: "六", date: "10/10", sortDate: "2026-10-10" },
+  { weekday: "一", date: "10/12", sortDate: "2026-10-12" },
+  { weekday: "二", date: "10/13", sortDate: "2026-10-13" },
+  { weekday: "三", date: "10/14", sortDate: "2026-10-14" },
+  { weekday: "四", date: "10/15", sortDate: "2026-10-15" },
+  { weekday: "五", date: "10/16", sortDate: "2026-10-16" },
+  { weekday: "六", date: "10/17", sortDate: "2026-10-17" },
 ];
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
+    { date: "13", day: "週二", sortDate: "2026-10-13", label: "Day 32", planId: "A", sets: 3, completedMoves: 4, exerciseResults: [
+      { name: "彈力帶胸推", reps: 10, sets: 3, equipment: "red-band" },
+      { name: "彈力帶肩推", reps: 10, sets: 3, equipment: "red-band" },
+      { name: "深蹲", reps: 10, sets: 3, equipment: "bodyweight" },
+      { name: "提踵", reps: 10, sets: 3, equipment: "bodyweight" },
+    ], summary: "完成 A 日四個動作，各 10 下 × 3 組；上半身使用紅色彈力帶（6–10 lbs），深蹲與提踵徒手。" },
     { date: "7", day: "週三", sortDate: "2026-10-07", label: "Day 31", planId: "B", sets: 3, completedMoves: 4, exerciseResults: [
       { name: "彈力帶划船", reps: 10, sets: 3, equipment: "red-band" },
       { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "red-band" },
@@ -310,6 +316,12 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
     { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
+    { date: "13", day: "週二", sortDate: "2026-10-13", label: "Day 31", planId: "A", sets: 3, completedMoves: 4, exerciseResults: [
+      { name: "彈力帶胸推", reps: 10, sets: 3, equipment: "yellow-band" },
+      { name: "彈力帶肩推", reps: 10, sets: 3, equipment: "yellow-band" },
+      { name: "深蹲", reps: 10, sets: 3, equipment: "bodyweight" },
+      { name: "提踵", reps: 10, sets: 3, equipment: "bodyweight" },
+    ], summary: "完成 A 日四個動作，各 10 下 × 3 組；上半身使用黃色彈力帶（2–5 lbs），深蹲與提踵徒手。" },
     { date: "7", day: "週三", sortDate: "2026-10-07", label: "Day 30", planId: "B", sets: 3, completedMoves: 4, exerciseResults: [
       { name: "彈力帶划船", reps: 10, sets: 3, equipment: "yellow-band" },
       { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "yellow-band" },
@@ -568,7 +580,7 @@ export default function Home() {
             <section aria-labelledby="exercise-title" className="training-program">
               <div className="section-heading">
                   <div>
-                    <div className="section-kicker">10/5—10/10 本週課表</div>
+                    <div className="section-kicker">10/12—10/17 本週課表</div>
                   <h2 id="exercise-title">兩種訓練日，交替進行</h2>
                   </div>
                 <span className={`band-chip ${personId === "dad" ? "red" : "yellow"}`}>
