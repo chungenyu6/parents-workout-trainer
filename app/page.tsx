@@ -252,6 +252,7 @@ const week = [
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
+    { date: "17", day: "週六", sortDate: "2026-10-17", label: "Day 35", summary: "有進行肌力訓練；動作、下數、組數、器材與身體感受未回報。同日另散步 60 分鐘。" },
     { date: "16", day: "週五", sortDate: "2026-10-16", label: "Day 34", summary: "有進行肌力訓練；動作、下數、組數、器材與身體感受未回報。" },
     { date: "14", day: "週三", sortDate: "2026-10-14", label: "Day 33", planId: "B", sets: 3, completedMoves: 4, exerciseResults: [
       { name: "彈力帶划船", reps: 10, sets: 3, equipment: "red-band" },
@@ -394,6 +395,7 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
 
 const activityRecords: Record<PersonId, ActivityRecord[]> = {
   dad: [
+    { date: "17", day: "週六", sortDate: "2026-10-17", activity: "散步", minutes: 60 },
     { date: "24", day: "週四", sortDate: "2026-09-24", activity: "散步", minutes: 60 },
     { date: "5", day: "週六", sortDate: "2026-09-05", activity: "散步", minutes: 60 },
     { date: "13", day: "週四", activity: "散步" },
