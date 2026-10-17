@@ -25,7 +25,7 @@ type WorkoutRecord = {
   rowEquipment?: "red-band";
   rowBandCount?: number;
   hipHingeReps?: number;
-  sets: number;
+  sets?: number;
   summary: string;
   completedMoves?: 2 | 3 | 4;
   planId?: "A" | "B";
@@ -252,6 +252,7 @@ const week = [
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
+    { date: "15", day: "週四", sortDate: "2026-10-15", label: "Day 34", summary: "有進行肌力訓練；動作、下數、組數、器材與身體感受未回報。" },
     { date: "14", day: "週三", sortDate: "2026-10-14", label: "Day 33", planId: "B", sets: 3, completedMoves: 4, exerciseResults: [
       { name: "彈力帶划船", reps: 10, sets: 3, equipment: "red-band" },
       { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "red-band" },
@@ -414,6 +415,7 @@ const noStrengthRecords: Record<PersonId, NoStrengthRecord[]> = {
     { date: "16", day: "週日", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
   ],
   mom: [
+    { date: "15", day: "週四", sortDate: "2026-10-15", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "23", day: "週三", sortDate: "2026-09-23", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "20", day: "週日", sortDate: "2026-09-20", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "19", day: "週六", sortDate: "2026-09-19", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
@@ -466,7 +468,7 @@ export default function Home() {
     const calendarDate = new Date(2026, 9, index + 1);
     const isFuture = calendarDate > todayStart;
 
-    if (strength) return { date, status: "strength", detail: `${strength.sets} 組`, label: `10 月 ${date} 日，肌力 ${strength.sets} 組` };
+    if (strength) return { date, status: "strength", detail: strength.sets ? `${strength.sets} 組` : "組數未回報", label: `10 月 ${date} 日，有進行肌力訓練${strength.sets ? `，${strength.sets} 組` : "，組數未回報"}` };
     if (walk) return { date, status: "walk", detail: walk.minutes ? `${walk.minutes} 分` : "散步", label: `10 月 ${date} 日，散步${walk.minutes ? ` ${walk.minutes} 分鐘` : ""}` };
     if (noStrength) return { date, status: "no-strength", detail: "未做肌力", label: `10 月 ${date} 日，未進行肌力訓練` };
     if (isFuture) return { date, status: "future", detail: "", label: `10 月 ${date} 日，尚未到達` };
@@ -720,7 +722,7 @@ export default function Home() {
                 <div className="record-entry" key={`strength-${record.sortDate ?? `${record.date}-${record.label}`}`}>
                   <div className="record-date"><strong>{record.date}</strong><span>{record.day}</span></div>
                   <div className="record-content">
-                    <strong>{record.label}・{record.planId ? `${record.planId} 日${record.completedMoves === 4 ? "全部完成" : `完成 ${record.completedMoves} 個動作`}` : record.completedMoves === 3 ? "完成前三個動作" : "四個動作全部完成"}</strong>
+                    <strong>{record.label}・{record.planId ? `${record.planId} 日${record.completedMoves === 4 ? "全部完成" : `完成 ${record.completedMoves} 個動作`}` : record.completedMoves === 3 ? "完成前三個動作" : record.completedMoves === 4 ? "四個動作全部完成" : "有進行肌力訓練"}</strong>
                     <p>{record.summary}</p>
                     {record.exerciseResults ? (
                       <>
@@ -735,10 +737,10 @@ export default function Home() {
                     ) : (
                       <>
                         <div className="record-moves" aria-label={`${record.label} 完成的四個動作`}>
-                          <span>椅子坐站：{record.chairStandReps ? `${record.chairStandReps} 下` : "未記錄下數"} × {record.sets} 組</span>
-                          <span>扶牆踮腳：{record.calfRaiseReps ? `${record.calfRaiseReps} 下` : "未記錄下數"} × {record.sets} 組</span>
-                          <span>{record.rowEquipment === "red-band" ? "彈力帶划船" : "空手划船"}：{record.rowReps ? `${record.rowReps} 下` : "未記錄下數"} × {record.sets} 組{record.rowEquipment === "red-band" ? `（紅色彈力帶 × ${record.rowBandCount ?? "？"} 條）` : ""}</span>
-                          <span>扶桌髖鉸鏈：{record.hipHingeReps ? `${record.hipHingeReps} 下` : record.completedMoves === 3 ? "未完成" : "未記錄下數"}{record.hipHingeReps ? ` × ${record.sets} 組` : ""}</span>
+                          <span>椅子坐站：{record.chairStandReps ? `${record.chairStandReps} 下` : "未記錄下數"}{record.sets ? ` × ${record.sets} 組` : "；組數未回報"}</span>
+                          <span>扶牆踮腳：{record.calfRaiseReps ? `${record.calfRaiseReps} 下` : "未記錄下數"}{record.sets ? ` × ${record.sets} 組` : "；組數未回報"}</span>
+                          <span>{record.rowEquipment === "red-band" ? "彈力帶划船" : "划船"}：{record.rowReps ? `${record.rowReps} 下` : "未記錄下數"}{record.sets ? ` × ${record.sets} 組` : "；組數未回報"}{record.rowEquipment === "red-band" ? `（紅色彈力帶 × ${record.rowBandCount ?? "？"} 條）` : ""}</span>
+                          <span>扶桌髖鉸鏈：{record.hipHingeReps ? `${record.hipHingeReps} 下` : record.completedMoves === 3 ? "未完成" : "未記錄下數"}{record.hipHingeReps && record.sets ? ` × ${record.sets} 組` : record.hipHingeReps ? "；組數未回報" : ""}</span>
                           {record.additionalBandSets ? <span>{record.bandSetScope === "row" ? `空手划船另加 ${record.additionalBandSets} 組紅色彈力帶：${record.bandReps ?? "未記錄"} 下 × ${record.bandCount ?? "？"} 條` : `彈力帶動作：${record.additionalBandSets} 組（動作、下數待補）`}</span> : null}
                         </div>
                         <small>{record.rowEquipment === "red-band" ? "僅拉背使用紅色彈力帶，每次 2 條；單條標示約 6–10 lbs，其餘動作徒手。" : record.bandSetScope === "row" ? "僅空手划船使用紅色彈力帶，每次 2 條；單條標示約 6–10 lbs，彈力帶組每組 10 下。" : record.additionalBandSets ? "另有彈力帶動作；對應動作與下數待補。" : record.equipmentStatus === "band" ? "有使用彈力帶；對應動作與下數待補。" : record.equipmentStatus === "unknown" ? "是否使用彈力帶或額外負重待補。" : record.completedMoves === 3 ? "前三個動作皆為空手；扶桌髖鉸鏈未進行。" : "四個動作皆為空手，未使用彈力帶或額外負重。"}</small>
