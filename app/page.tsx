@@ -324,6 +324,9 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
     { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
+    { date: "17", day: "週六", sortDate: "2026-10-17", label: "Day 33", exerciseResults: [
+      { name: "額外深蹲", reps: 10, sets: 1, equipment: "bodyweight" },
+    ], summary: "有進行肌力訓練，並額外完成徒手深蹲 10 下；原訓練的動作、下數、組數、器材與身體感受未回報。" },
     { date: "14", day: "週三", sortDate: "2026-10-14", label: "Day 32", planId: "B", sets: 3, completedMoves: 4, exerciseResults: [
       { name: "彈力帶划船", reps: 10, sets: 3, equipment: "yellow-band" },
       { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "yellow-band" },
