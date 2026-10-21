@@ -325,6 +325,7 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
     { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
+    { date: "20", day: "週二", sortDate: "2026-10-20", label: "Day 34", summary: "有進行肌力訓練；動作、下數、組數、器材與身體感受未回報。" },
     { date: "17", day: "週六", sortDate: "2026-10-17", label: "Day 33", exerciseResults: [
       { name: "額外深蹲", reps: 10, sets: 1, equipment: "bodyweight" },
     ], summary: "有進行肌力訓練，並額外完成徒手深蹲 10 下；原訓練的動作、下數、組數、器材與身體感受未回報。" },
@@ -421,7 +422,6 @@ const noStrengthRecords: Record<PersonId, NoStrengthRecord[]> = {
     { date: "16", day: "週日", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
   ],
   mom: [
-    { date: "20", day: "週二", sortDate: "2026-10-20", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "16", day: "週五", sortDate: "2026-10-16", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "23", day: "週三", sortDate: "2026-09-23", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "20", day: "週日", sortDate: "2026-09-20", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
