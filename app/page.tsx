@@ -78,13 +78,13 @@ const trainingPlans = [
   {
     id: "A",
     days: "週二・週五",
-    dates: "10/20・10/23",
+    dates: "10/27・10/30",
     exercises: ["彈力帶胸推", "彈力帶肩推", "深蹲", "提踵"],
   },
   {
     id: "B",
     days: "週三・週六",
-    dates: "10/21・10/24",
+    dates: "10/28・10/31",
     exercises: ["彈力帶划船", "彈力帶擴胸", "深蹲", "提踵"],
   },
 ];
@@ -242,12 +242,12 @@ const conceptCards: ConceptCard[] = [
 ];
 
 const week = [
-  { weekday: "一", date: "10/19", sortDate: "2026-10-19" },
-  { weekday: "二", date: "10/20", sortDate: "2026-10-20" },
-  { weekday: "三", date: "10/21", sortDate: "2026-10-21" },
-  { weekday: "四", date: "10/22", sortDate: "2026-10-22" },
-  { weekday: "五", date: "10/23", sortDate: "2026-10-23" },
-  { weekday: "六", date: "10/24", sortDate: "2026-10-24" },
+  { weekday: "一", date: "10/26", sortDate: "2026-10-26" },
+  { weekday: "二", date: "10/27", sortDate: "2026-10-27" },
+  { weekday: "三", date: "10/28", sortDate: "2026-10-28" },
+  { weekday: "四", date: "10/29", sortDate: "2026-10-29" },
+  { weekday: "五", date: "10/30", sortDate: "2026-10-30" },
+  { weekday: "六", date: "10/31", sortDate: "2026-10-31" },
 ];
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
@@ -415,6 +415,7 @@ const activityRecords: Record<PersonId, ActivityRecord[]> = {
 
 const noStrengthRecords: Record<PersonId, NoStrengthRecord[]> = {
   dad: [
+    { date: "21", day: "週三", sortDate: "2026-10-21", summary: "因膝蓋與腋下受傷，未進行肌力訓練；其他活動與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "21", day: "週一", sortDate: "2026-09-21", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "19", day: "週六", sortDate: "2026-09-19", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "12", day: "週六", sortDate: "2026-09-12", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
@@ -422,6 +423,7 @@ const noStrengthRecords: Record<PersonId, NoStrengthRecord[]> = {
     { date: "16", day: "週日", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
   ],
   mom: [
+    { date: "21", day: "週三", sortDate: "2026-10-21", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "16", day: "週五", sortDate: "2026-10-16", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "23", day: "週三", sortDate: "2026-09-23", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
     { date: "20", day: "週日", sortDate: "2026-09-20", summary: "未進行肌力訓練；其他活動、原因與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
@@ -601,7 +603,7 @@ export default function Home() {
             <section aria-labelledby="exercise-title" className="training-program">
               <div className="section-heading">
                   <div>
-                    <div className="section-kicker">10/19—10/24 本週課表</div>
+                    <div className="section-kicker">10/26—10/31 本週課表</div>
                   <h2 id="exercise-title">兩種訓練日，交替進行</h2>
                   </div>
                 <span className={`band-chip ${personId === "dad" ? "red" : "yellow"}`}>
