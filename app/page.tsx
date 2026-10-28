@@ -331,6 +331,18 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
     { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
+    { date: "28", day: "週三", sortDate: "2026-10-28", label: "Day 36", planId: "B", sets: 3, completedMoves: 4, exerciseResults: [
+      { name: "彈力帶划船", reps: 10, sets: 3, equipment: "yellow-band" },
+      { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "yellow-band" },
+      { name: "深蹲", reps: 10, sets: 3, equipment: "bodyweight" },
+      { name: "提踵", reps: 10, sets: 3, equipment: "bodyweight" },
+    ], summary: "完成 B 日四個動作，各 10 下 × 3 組；上半身使用黃色彈力帶（2–5 lbs），深蹲與提踵徒手。" },
+    { date: "27", day: "週二", sortDate: "2026-10-27", label: "Day 35", planId: "A", sets: 3, completedMoves: 4, exerciseResults: [
+      { name: "彈力帶胸推", reps: 10, sets: 3, equipment: "yellow-band" },
+      { name: "彈力帶肩推", reps: 10, sets: 3, equipment: "yellow-band" },
+      { name: "深蹲", reps: 10, sets: 3, equipment: "bodyweight" },
+      { name: "提踵", reps: 10, sets: 3, equipment: "bodyweight" },
+    ], summary: "完成 A 日四個動作，各 10 下 × 3 組；上半身使用黃色彈力帶（2–5 lbs），深蹲與提踵徒手。" },
     { date: "20", day: "週二", sortDate: "2026-10-20", label: "Day 34", summary: "有進行肌力訓練；動作、下數、組數、器材與身體感受未回報。" },
     { date: "17", day: "週六", sortDate: "2026-10-17", label: "Day 33", exerciseResults: [
       { name: "額外深蹲", reps: 10, sets: 1, equipment: "bodyweight" },
