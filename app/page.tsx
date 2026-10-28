@@ -252,6 +252,12 @@ const week = [
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
+    { date: "28", day: "週三", sortDate: "2026-10-28", label: "Day 37", planId: "B", sets: 3, completedMoves: 4, exerciseResults: [
+      { name: "彈力帶划船", reps: 10, sets: 3, equipment: "red-band" },
+      { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "red-band" },
+      { name: "深蹲", reps: 10, sets: 3, equipment: "bodyweight" },
+      { name: "提踵", reps: 10, sets: 3, equipment: "bodyweight" },
+    ], summary: "完成 B 日四個動作，各 10 下 × 3 組；上半身使用紅色彈力帶（6–10 lbs），深蹲與提踵徒手。膝蓋與腋下受傷後的恢復狀況及本次身體感受未回報。" },
     { date: "20", day: "週二", sortDate: "2026-10-20", label: "Day 36", summary: "有進行肌力訓練；動作、下數、組數、器材與身體感受未回報。" },
     { date: "17", day: "週六", sortDate: "2026-10-17", label: "Day 35", summary: "有進行肌力訓練；動作、下數、組數、器材與身體感受未回報。同日另散步 60 分鐘。" },
     { date: "16", day: "週五", sortDate: "2026-10-16", label: "Day 34", summary: "有進行肌力訓練；動作、下數、組數、器材與身體感受未回報。" },
