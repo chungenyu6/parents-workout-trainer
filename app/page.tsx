@@ -52,6 +52,7 @@ type ActivityRecord = {
   sortDate?: string;
   activity: "散步";
   minutes?: number;
+  conditionNote?: string;
 };
 
 type NoStrengthRecord = {
@@ -78,13 +79,13 @@ const trainingPlans = [
   {
     id: "A",
     days: "週二・週五",
-    dates: "10/27・10/30",
+    dates: "11/3・11/6",
     exercises: ["彈力帶胸推", "彈力帶肩推", "深蹲", "提踵"],
   },
   {
     id: "B",
     days: "週三・週六",
-    dates: "10/28・10/31",
+    dates: "11/4・11/7",
     exercises: ["彈力帶划船", "彈力帶擴胸", "深蹲", "提踵"],
   },
 ];
@@ -242,16 +243,18 @@ const conceptCards: ConceptCard[] = [
 ];
 
 const week = [
-  { weekday: "一", date: "10/26", sortDate: "2026-10-26" },
-  { weekday: "二", date: "10/27", sortDate: "2026-10-27" },
-  { weekday: "三", date: "10/28", sortDate: "2026-10-28" },
-  { weekday: "四", date: "10/29", sortDate: "2026-10-29" },
-  { weekday: "五", date: "10/30", sortDate: "2026-10-30" },
-  { weekday: "六", date: "10/31", sortDate: "2026-10-31" },
+  { weekday: "一", date: "11/2", sortDate: "2026-11-02" },
+  { weekday: "二", date: "11/3", sortDate: "2026-11-03" },
+  { weekday: "三", date: "11/4", sortDate: "2026-11-04" },
+  { weekday: "四", date: "11/5", sortDate: "2026-11-05" },
+  { weekday: "五", date: "11/6", sortDate: "2026-11-06" },
+  { weekday: "六", date: "11/7", sortDate: "2026-11-07" },
 ];
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
+    { date: "1", day: "週日", sortDate: "2026-11-01", label: "Day 39", summary: "有進行肌力訓練；動作、下數、組數、器材與身體感受未回報。" },
+    { date: "31", day: "週六", sortDate: "2026-10-31", label: "Day 38", summary: "有進行肌力訓練；動作、下數、組數、器材與身體感受未回報。" },
     { date: "28", day: "週三", sortDate: "2026-10-28", label: "Day 37", planId: "B", sets: 3, completedMoves: 4, exerciseResults: [
       { name: "彈力帶划船", reps: 10, sets: 3, equipment: "red-band" },
       { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "red-band" },
@@ -331,6 +334,8 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
     { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
+    { date: "1", day: "週日", sortDate: "2026-11-01", label: "Day 38", summary: "有進行肌力訓練；動作、下數、組數、器材與身體感受未回報。" },
+    { date: "31", day: "週六", sortDate: "2026-10-31", label: "Day 37", summary: "有進行肌力訓練；動作、下數、組數、器材與身體感受未回報。" },
     { date: "28", day: "週三", sortDate: "2026-10-28", label: "Day 36", planId: "B", sets: 3, completedMoves: 4, exerciseResults: [
       { name: "彈力帶划船", reps: 10, sets: 3, equipment: "yellow-band" },
       { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "yellow-band" },
@@ -418,6 +423,7 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
 
 const activityRecords: Record<PersonId, ActivityRecord[]> = {
   dad: [
+    { date: "2", day: "週一", sortDate: "2026-11-02", activity: "散步", minutes: 60, conditionNote: "散步後聽起來蠻累。" },
     { date: "17", day: "週六", sortDate: "2026-10-17", activity: "散步", minutes: 60 },
     { date: "24", day: "週四", sortDate: "2026-09-24", activity: "散步", minutes: 60 },
     { date: "5", day: "週六", sortDate: "2026-09-05", activity: "散步", minutes: 60 },
@@ -425,6 +431,7 @@ const activityRecords: Record<PersonId, ActivityRecord[]> = {
     { date: "12", day: "週三", activity: "散步", minutes: 60 },
   ],
   mom: [
+    { date: "2", day: "週一", sortDate: "2026-11-02", activity: "散步", minutes: 60, conditionNote: "散步後聽起來蠻累。" },
     { date: "24", day: "週四", sortDate: "2026-09-24", activity: "散步", minutes: 60 },
     { date: "5", day: "週六", sortDate: "2026-09-05", activity: "散步", minutes: 60 },
     { date: "12", day: "週三", activity: "散步", minutes: 60 },
@@ -482,24 +489,24 @@ export default function Home() {
   });
   const strengthCount = personRecords.length;
   const activityCount = personActivities.length;
-  const octoberStrengthRecords = personRecords.filter((record) => record.sortDate?.startsWith("2026-10-"));
-  const octoberWalkRecords = personActivities.filter((record) => record.sortDate?.startsWith("2026-10-"));
-  const octoberNoStrengthRecords = personNoStrengthRecords.filter((record) => record.sortDate?.startsWith("2026-10-"));
+  const novemberStrengthRecords = personRecords.filter((record) => record.sortDate?.startsWith("2026-11-"));
+  const novemberWalkRecords = personActivities.filter((record) => record.sortDate?.startsWith("2026-11-"));
+  const novemberNoStrengthRecords = personNoStrengthRecords.filter((record) => record.sortDate?.startsWith("2026-11-"));
   const todayStart = new Date();
   todayStart.setHours(0, 0, 0, 0);
-  const monthDays = Array.from({ length: 31 }, (_, index) => {
+  const monthDays = Array.from({ length: 30 }, (_, index) => {
     const date = String(index + 1);
-    const strength = octoberStrengthRecords.find((record) => record.date === date);
-    const walk = octoberWalkRecords.find((record) => record.date === date);
-    const noStrength = octoberNoStrengthRecords.find((record) => record.date === date);
-    const calendarDate = new Date(2026, 9, index + 1);
+    const strength = novemberStrengthRecords.find((record) => record.date === date);
+    const walk = novemberWalkRecords.find((record) => record.date === date);
+    const noStrength = novemberNoStrengthRecords.find((record) => record.date === date);
+    const calendarDate = new Date(2026, 10, index + 1);
     const isFuture = calendarDate > todayStart;
 
-    if (strength) return { date, status: "strength", detail: strength.sets ? `${strength.sets} 組` : "組數未回報", label: `10 月 ${date} 日，有進行肌力訓練${strength.sets ? `，${strength.sets} 組` : "，組數未回報"}` };
-    if (walk) return { date, status: "walk", detail: walk.minutes ? `${walk.minutes} 分` : "散步", label: `10 月 ${date} 日，散步${walk.minutes ? ` ${walk.minutes} 分鐘` : ""}` };
-    if (noStrength) return { date, status: "no-strength", detail: "未做肌力", label: `10 月 ${date} 日，未進行肌力訓練` };
-    if (isFuture) return { date, status: "future", detail: "", label: `10 月 ${date} 日，尚未到達` };
-    return { date, status: "empty", detail: "未回報", label: `10 月 ${date} 日，尚未回報` };
+    if (strength) return { date, status: "strength", detail: strength.sets ? `${strength.sets} 組` : "組數未回報", label: `11 月 ${date} 日，有進行肌力訓練${strength.sets ? `，${strength.sets} 組` : "，組數未回報"}` };
+    if (walk) return { date, status: "walk", detail: walk.minutes ? `${walk.minutes} 分` : "散步", label: `11 月 ${date} 日，散步${walk.minutes ? ` ${walk.minutes} 分鐘` : ""}` };
+    if (noStrength) return { date, status: "no-strength", detail: "未做肌力", label: `11 月 ${date} 日，未進行肌力訓練` };
+    if (isFuture) return { date, status: "future", detail: "", label: `11 月 ${date} 日，尚未到達` };
+    return { date, status: "empty", detail: "未回報", label: `11 月 ${date} 日，尚未回報` };
   });
   const concept = conceptCards[conceptIndex];
   const dailyIndex = useMemo(() => new Date().getDate() % conceptCards.length, []);
@@ -621,7 +628,7 @@ export default function Home() {
             <section aria-labelledby="exercise-title" className="training-program">
               <div className="section-heading">
                   <div>
-                    <div className="section-kicker">10/26—10/31 本週課表</div>
+                    <div className="section-kicker">11/2—11/7 本週課表</div>
                   <h2 id="exercise-title">兩種訓練日，交替進行</h2>
                   </div>
                 <span className={`band-chip ${personId === "dad" ? "red" : "yellow"}`}>
@@ -695,9 +702,9 @@ export default function Home() {
             <section className="activity-map" aria-labelledby="activity-map-title">
               <div className="activity-map-heading">
                 <div>
-                  <span className="section-kicker">2026 年 10 月</span>
-                  <h2 id="activity-map-title">十月活動地圖</h2>
-                  <p>{person.label}本月 {octoberStrengthRecords.length} 次肌力、{octoberWalkRecords.length} 次散步、{octoberNoStrengthRecords.length} 天明確未做肌力。</p>
+                  <span className="section-kicker">2026 年 11 月</span>
+                  <h2 id="activity-map-title">十一月活動地圖</h2>
+                  <p>{person.label}本月 {novemberStrengthRecords.length} 次肌力、{novemberWalkRecords.length} 次散步、{novemberNoStrengthRecords.length} 天明確未做肌力。</p>
                 </div>
                 <div className="activity-legend" aria-label="活動地圖圖例">
                   <span><i className="strength" />肌力</span>
@@ -706,9 +713,9 @@ export default function Home() {
                   <span><i className="empty" />未回報</span>
                 </div>
               </div>
-              <div className="month-grid" role="grid" aria-label={`${person.label} 2026 年 10 月活動紀錄`}>
+              <div className="month-grid" role="grid" aria-label={`${person.label} 2026 年 11 月活動紀錄`}>
                 {(["一", "二", "三", "四", "五", "六", "日"] as const).map((weekday) => <span className="month-weekday" role="columnheader" key={weekday}>{weekday}</span>)}
-                {Array.from({ length: 3 }, (_, index) => <span className="month-offset" aria-hidden="true" key={`offset-${index}`} />)}
+                {Array.from({ length: 6 }, (_, index) => <span className="month-offset" aria-hidden="true" key={`offset-${index}`} />)}
                 {monthDays.map((day) => (
                   <div className={`month-day ${day.status}`} role="gridcell" aria-label={day.label} key={day.date}>
                     <span>{day.date}</span>
@@ -721,7 +728,7 @@ export default function Home() {
             </section>
             <section className="record-month" aria-labelledby="record-title">
               <div className="section-heading">
-                <div><div className="section-kicker">2026 年 8–10 月</div><h2 id="record-title">{strengthCount} 次肌力・{activityCount} 次散步</h2></div>
+                <div><div className="section-kicker">2026 年 8–11 月</div><h2 id="record-title">{strengthCount} 次肌力・{activityCount} 次散步</h2></div>
                 <span className="positive-badge">本週肌力目標已達成</span>
               </div>
               {timelineRecords.map((record) => record.kind === "no-strength" ? (
@@ -742,7 +749,7 @@ export default function Home() {
                     <div className="record-moves" aria-label={`${record.day}完成的其他活動`}>
                       <span>散步：{record.minutes ? `${record.minutes} 分鐘` : "時間未記錄"}</span>
                     </div>
-                    <small>速度、距離與身體感受尚未回報；不列入肌力訓練次數。</small>
+                    <small>{record.conditionNote ? `身體感受：${record.conditionNote}` : "速度、距離與身體感受尚未回報。"} 不列入肌力訓練次數。</small>
                   </div>
                 </div>
               ) : (
