@@ -62,6 +62,15 @@ type NoStrengthRecord = {
   summary: string;
 };
 
+type WeeklyTrainingRecord = {
+  period: string;
+  date: string;
+  day: string;
+  sortDate: string;
+  sessions: number;
+  summary: string;
+};
+
 const people: Record<PersonId, { label: string; greeting: string; framing: string }> = {
   dad: {
     label: "爸爸",
@@ -79,13 +88,13 @@ const trainingPlans = [
   {
     id: "A",
     days: "週二・週五",
-    dates: "11/3・11/6",
+    dates: "11/10・11/13",
     exercises: ["彈力帶胸推", "彈力帶肩推", "深蹲", "提踵"],
   },
   {
     id: "B",
     days: "週三・週六",
-    dates: "11/4・11/7",
+    dates: "11/11・11/14",
     exercises: ["彈力帶划船", "彈力帶擴胸", "深蹲", "提踵"],
   },
 ];
@@ -243,12 +252,12 @@ const conceptCards: ConceptCard[] = [
 ];
 
 const week = [
-  { weekday: "一", date: "11/2", sortDate: "2026-11-02" },
-  { weekday: "二", date: "11/3", sortDate: "2026-11-03" },
-  { weekday: "三", date: "11/4", sortDate: "2026-11-04" },
-  { weekday: "四", date: "11/5", sortDate: "2026-11-05" },
-  { weekday: "五", date: "11/6", sortDate: "2026-11-06" },
-  { weekday: "六", date: "11/7", sortDate: "2026-11-07" },
+  { weekday: "一", date: "11/9", sortDate: "2026-11-09" },
+  { weekday: "二", date: "11/10", sortDate: "2026-11-10" },
+  { weekday: "三", date: "11/11", sortDate: "2026-11-11" },
+  { weekday: "四", date: "11/12", sortDate: "2026-11-12" },
+  { weekday: "五", date: "11/13", sortDate: "2026-11-13" },
+  { weekday: "六", date: "11/14", sortDate: "2026-11-14" },
 ];
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
@@ -458,6 +467,15 @@ const activityRecords: Record<PersonId, ActivityRecord[]> = {
   ],
 };
 
+const weeklyTrainingRecords: Record<PersonId, WeeklyTrainingRecord[]> = {
+  dad: [
+    { period: "11/2–11/8", date: "2–8", day: "當週", sortDate: "2026-11-08", sessions: 2, summary: "本週完成 2 次肌力訓練；確切日期與 A／B 日未回報。每次沿用固定規格：四個動作各 10 下 × 3 組，爸爸上半身使用紅色彈力帶（6–10 lbs），深蹲與提踵徒手。" },
+  ],
+  mom: [
+    { period: "11/2–11/8", date: "2–8", day: "當週", sortDate: "2026-11-08", sessions: 2, summary: "本週完成 2 次肌力訓練；確切日期與 A／B 日未回報。每次沿用固定規格：四個動作各 10 下 × 3 組，媽媽上半身使用黃色彈力帶（2–5 lbs），深蹲與提踵徒手。" },
+  ],
+};
+
 const noStrengthRecords: Record<PersonId, NoStrengthRecord[]> = {
   dad: [
     { date: "21", day: "週三", sortDate: "2026-10-21", summary: "因膝蓋與腋下受傷，未進行肌力訓練；其他活動與身體感受未回報。此筆不標示為失敗，也不推測為主動休息。" },
@@ -496,22 +514,28 @@ export default function Home() {
   const personRecords = workoutRecords[personId];
   const personActivities = activityRecords[personId];
   const personNoStrengthRecords = noStrengthRecords[personId];
+  const personWeeklyTrainingRecords = weeklyTrainingRecords[personId];
   const bandColor = personId === "dad" ? "紅色" : "黃色";
   const bandPounds = personId === "dad" ? "6–10 lbs" : "2–5 lbs";
   const timelineRecords = [
     ...personRecords.map((record) => ({ ...record, kind: "strength" as const })),
     ...personActivities.map((record) => ({ ...record, kind: "walk" as const })),
     ...personNoStrengthRecords.map((record) => ({ ...record, kind: "no-strength" as const })),
+    ...personWeeklyTrainingRecords.map((record) => ({ ...record, kind: "weekly-strength" as const })),
   ].sort((a, b) => {
     const aDate = a.sortDate ?? `2026-08-${a.date.padStart(2, "0")}`;
     const bDate = b.sortDate ?? `2026-08-${b.date.padStart(2, "0")}`;
     return bDate.localeCompare(aDate);
   });
-  const strengthCount = personRecords.length;
+  const weeklyStrengthCount = personWeeklyTrainingRecords.reduce((total, record) => total + record.sessions, 0);
+  const strengthCount = personRecords.length + weeklyStrengthCount;
   const activityCount = personActivities.length;
   const novemberStrengthRecords = personRecords.filter((record) => record.sortDate?.startsWith("2026-11-"));
   const novemberWalkRecords = personActivities.filter((record) => record.sortDate?.startsWith("2026-11-"));
   const novemberNoStrengthRecords = personNoStrengthRecords.filter((record) => record.sortDate?.startsWith("2026-11-"));
+  const novemberWeeklyStrengthCount = personWeeklyTrainingRecords
+    .filter((record) => record.sortDate.startsWith("2026-11-"))
+    .reduce((total, record) => total + record.sessions, 0);
   const todayStart = new Date();
   todayStart.setHours(0, 0, 0, 0);
   const monthDays = Array.from({ length: 30 }, (_, index) => {
@@ -648,7 +672,7 @@ export default function Home() {
             <section aria-labelledby="exercise-title" className="training-program">
               <div className="section-heading">
                   <div>
-                    <div className="section-kicker">11/2—11/7 本週課表</div>
+                    <div className="section-kicker">11/9—11/14 本週課表</div>
                   <h2 id="exercise-title">兩種訓練日，交替進行</h2>
                   </div>
                 <span className={`band-chip ${personId === "dad" ? "red" : "yellow"}`}>
@@ -724,7 +748,7 @@ export default function Home() {
                 <div>
                   <span className="section-kicker">2026 年 11 月</span>
                   <h2 id="activity-map-title">十一月活動地圖</h2>
-                  <p>{person.label}本月 {novemberStrengthRecords.length} 次肌力、{novemberWalkRecords.length} 次散步、{novemberNoStrengthRecords.length} 天明確未做肌力。</p>
+                  <p>{person.label}本月 {novemberStrengthRecords.length + novemberWeeklyStrengthCount} 次肌力、{novemberWalkRecords.length} 次散步、{novemberNoStrengthRecords.length} 天明確未做肌力。</p>
                 </div>
                 <div className="activity-legend" aria-label="活動地圖圖例">
                   <span><i className="strength" />肌力</span>
@@ -744,14 +768,23 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <p className="activity-map-note">空白只代表尚未回報；只有明確收到「沒有做」時，才標示為未做肌力。</p>
+              <p className="activity-map-note">空白只代表尚未回報；只有明確收到「沒有做」時，才標示為未做肌力。11/2–11/8 另有 2 次肌力訓練因日期未回報，不放入特定日期格。</p>
             </section>
             <section className="record-month" aria-labelledby="record-title">
               <div className="section-heading">
                 <div><div className="section-kicker">2026 年 8–11 月</div><h2 id="record-title">{strengthCount} 次肌力・{activityCount} 次散步</h2></div>
                 <span className="positive-badge">本週肌力目標已達成</span>
               </div>
-              {timelineRecords.map((record) => record.kind === "no-strength" ? (
+              {timelineRecords.map((record) => record.kind === "weekly-strength" ? (
+                <div className="record-entry" key={`weekly-strength-${record.sortDate}`}>
+                  <div className="record-date"><strong>{record.date}</strong><span>{record.day}</span></div>
+                  <div className="record-content">
+                    <strong>{record.period}・肌力訓練 {record.sessions} 次</strong>
+                    <p>{record.summary}</p>
+                    <small>計入肌力訓練總次數；因確切日期未回報，不在活動月曆指定日期。</small>
+                  </div>
+                </div>
+              ) : record.kind === "no-strength" ? (
                 <div className="record-entry no-strength-entry" key={`no-strength-${record.sortDate ?? `${record.date}-${record.day}`}`}>
                   <div className="record-date"><strong>{record.date}</strong><span>{record.day}</span></div>
                   <div className="record-content">
