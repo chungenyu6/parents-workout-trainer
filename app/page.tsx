@@ -262,6 +262,18 @@ const week = [
 
 const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
   dad: [
+    { date: "12", day: "週四", sortDate: "2026-11-12", label: "Day 44", planId: "B", sets: 3, completedMoves: 4, exerciseResults: [
+      { name: "彈力帶划船", reps: 10, sets: 3, equipment: "red-band" },
+      { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "red-band" },
+      { name: "深蹲", reps: 10, sets: 3, equipment: "bodyweight" },
+      { name: "提踵", reps: 10, sets: 3, equipment: "bodyweight" },
+    ], summary: "沿用前一天 B 日內容，完成四個動作，各 10 下 × 3 組；上半身使用紅色彈力帶（6–10 lbs），深蹲與提踵徒手。" },
+    { date: "11", day: "週三", sortDate: "2026-11-11", label: "Day 43", planId: "B", sets: 3, completedMoves: 4, exerciseResults: [
+      { name: "彈力帶划船", reps: 10, sets: 3, equipment: "red-band" },
+      { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "red-band" },
+      { name: "深蹲", reps: 10, sets: 3, equipment: "bodyweight" },
+      { name: "提踵", reps: 10, sets: 3, equipment: "bodyweight" },
+    ], summary: "完成 B 日四個動作，各 10 下 × 3 組；上半身使用紅色彈力帶（6–10 lbs），深蹲與提踵徒手。" },
     { date: "10", day: "週二", sortDate: "2026-11-10", label: "Day 42", planId: "A", sets: 3, completedMoves: 4, exerciseResults: [
       { name: "彈力帶胸推", reps: 10, sets: 3, equipment: "red-band" },
       { name: "彈力帶肩推", reps: 10, sets: 3, equipment: "red-band" },
@@ -359,6 +371,18 @@ const workoutRecords: Record<PersonId, WorkoutRecord[]> = {
     { date: "10", day: "週一", label: "Day 1", minutes: 20, hipHingeReps: 10, sets: 1, summary: "約 20 分鐘，自己完成；身體感覺舒服，並願意下次再做。" },
   ],
   mom: [
+    { date: "12", day: "週四", sortDate: "2026-11-12", label: "Day 43", planId: "B", sets: 3, completedMoves: 4, exerciseResults: [
+      { name: "彈力帶划船", reps: 10, sets: 3, equipment: "yellow-band" },
+      { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "yellow-band" },
+      { name: "深蹲", reps: 10, sets: 3, equipment: "bodyweight" },
+      { name: "提踵", reps: 10, sets: 3, equipment: "bodyweight" },
+    ], summary: "沿用前一天 B 日內容，完成四個動作，各 10 下 × 3 組；上半身使用黃色彈力帶（2–5 lbs），深蹲與提踵徒手。" },
+    { date: "11", day: "週三", sortDate: "2026-11-11", label: "Day 42", planId: "B", sets: 3, completedMoves: 4, exerciseResults: [
+      { name: "彈力帶划船", reps: 10, sets: 3, equipment: "yellow-band" },
+      { name: "彈力帶擴胸", reps: 10, sets: 3, equipment: "yellow-band" },
+      { name: "深蹲", reps: 10, sets: 3, equipment: "bodyweight" },
+      { name: "提踵", reps: 10, sets: 3, equipment: "bodyweight" },
+    ], summary: "完成 B 日四個動作，各 10 下 × 3 組；上半身使用黃色彈力帶（2–5 lbs），深蹲與提踵徒手。" },
     { date: "10", day: "週二", sortDate: "2026-11-10", label: "Day 41", planId: "A", sets: 3, completedMoves: 4, exerciseResults: [
       { name: "彈力帶胸推", reps: 10, sets: 3, equipment: "yellow-band" },
       { name: "彈力帶肩推", reps: 10, sets: 3, equipment: "yellow-band" },
